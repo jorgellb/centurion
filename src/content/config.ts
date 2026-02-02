@@ -62,8 +62,22 @@ const blogCollection = defineCollection({
     })
 });
 
+const productosAluminioCollection = defineCollection({
+    loader: glob({ pattern: '**/*.md', base: './src/content/productos-aluminio' }),
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        icon: z.string(),
+        features: z.array(z.string()),
+        metaTitle: z.string(),
+        metaDescription: z.string(),
+        image: z.string().optional()
+    })
+});
+
 export const collections = {
     'servicios': serviciosCollection,
     'localidades': localidadesCollection,
-    'blog': blogCollection
+    'blog': blogCollection,
+    'productos-aluminio': productosAluminioCollection
 };

@@ -104,7 +104,7 @@ const { title, metaTitle, metaDescription, description, features, priceRange, fa
                   }[product.icon] || Settings;
 
                   return (
-                    <div class="group service-card bg-white hover:bg-slate-50/30 transition-all duration-500">
+                    <a href={`/servicios/carpinteria-aluminio/${product.slug}/`} class="group service-card bg-white hover:bg-slate-50/30 transition-all duration-500 block">
                       <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-[100%] transition-transform group-hover:scale-110 duration-700"></div>
                       <div class="relative z-10">
                         <div class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-slate-900/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 mb-8">
@@ -116,14 +116,14 @@ const { title, metaTitle, metaDescription, description, features, priceRange, fa
                         </p>
                         <div class="flex items-center justify-between">
                           <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-900">
-                            Detalles <ArrowRight size={14} class="group-hover:translate-x-1 transition-transform" />
+                            Ver Detalles <ArrowRight size={14} class="group-hover:translate-x-1 transition-transform" />
                           </div>
                           <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
                             <Zap size={14} />
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   )
                 })}
               </div>
