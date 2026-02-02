@@ -43,7 +43,11 @@
   }
 
   .premium-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 font-bold;
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-950 via-slate-900 to-slate-700 font-bold;
+  }
+
+  .premium-gradient-text-white {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-slate-100 to-slate-300 font-bold;
   }
 
   .btn-primary {
