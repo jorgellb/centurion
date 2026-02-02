@@ -9,15 +9,15 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 frosted-glass py-4">
+<header class="fixed top-0 left-0 right-0 z-[110] frosted-glass py-4">
   <div class="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 group">
       <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white rotate-3 group-hover:rotate-0 transition-transform duration-300">
-        <span class="font-bold text-xl leading-none">S</span>
+        <span class="font-bold text-xl leading-none">M</span>
       </div>
       <div class="flex flex-col">
-        <span class="font-heading font-bold text-xl leading-none">Servicios <br/> Vera Playa</span>
+        <span class="font-heading font-bold text-xl leading-none">Multiservicios <br/> Vera Playa</span>
       </div>
     </a>
 
@@ -50,7 +50,7 @@ const navItems = [
     </div>
 
     <!-- Mobile Menu Button -->
-    <button class="md:hidden p-2 text-slate-900 z-[100] relative" id="mobile-menu-toggle" aria-label="Menu">
+    <button class="md:hidden p-2 text-slate-900 z-[120] relative" id="mobile-menu-toggle" aria-label="Menu">
       <Menu size={24} class="menu-icon" />
       <X size={24} class="close-icon hidden" />
     </button>
@@ -99,13 +99,13 @@ const navItems = [
   const closeIcon = toggle?.querySelector('.close-icon');
 
   toggle?.addEventListener('click', () => {
+    const isOpening = menu?.style.transform !== 'translateX(0%)';
     if (menu) {
-      const isOpen = menu.style.transform === 'translateX(0%)';
-      menu.style.transform = isOpen ? 'translateX(100%)' : 'translateX(0%)';
+      menu.style.transform = isOpening ? 'translateX(0%)' : 'translateX(100%)';
     }
-    menuIcon?.classList.toggle('hidden');
-    closeIcon?.classList.toggle('hidden');
-    document.body.style.overflow = document.body.style.overflow === 'hidden' ? '' : 'hidden';
+    menuIcon?.classList.toggle('hidden', isOpening);
+    closeIcon?.classList.toggle('hidden', !isOpening);
+    document.body.style.overflow = isOpening ? 'hidden' : '';
   });
 
   // Close menu when clicking a link

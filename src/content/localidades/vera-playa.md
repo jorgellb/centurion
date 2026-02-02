@@ -1,8 +1,8 @@
 ﻿---
 nombre: "Vera Playa"
 slug: "vera-playa"
-metaTitle: "Limpieza Profesional en Vera Playa | Limpieza Vera Playa"
-metaDescription: "Servicios técnicos de limpieza en Vera Playa. Especialistas en apartamentos vacacionales, comunidades de lujo y mantenimiento integral."
+metaTitle: "Multiservicios en Vera Playa | Multiservicios Vera Playa"
+metaDescription: "Servicios profesionales en Vera Playa: limpieza, cerrajería 24h, reformas y mantenimiento integral de propiedades."
 coordenadas:
   lat: 37.2289
   lng: -1.8219
@@ -27,9 +27,9 @@ testimonios:
     texto: "Llevamos años confiando en su equipo para el mantenimiento de portales y zonas comunes. Profesionalidad absoluta."
     rating: 5
 ---
-# Su Empresa de Limpieza en Vera Playa
+# Multiservicios en Vera Playa
 
-Vera Playa es el corazón del turismo en el Levante Almeriense, y en **Limpieza Vera Playa** entendemos las exigencias de este entorno. No solo limpiamos; mantenemos el valor de su inversión.
+Vera Playa es el corazón del turismo en el Levante Almeriense, y en **Multiservicios Vera Playa** entendemos las exigencias de este entorno. No solo trabajamos; mantenemos el valor de su inversión.
 
 Nuestro equipo especializado en la zona de **Vera Playa** ofrece una respuesta ágil y profesional para propietarios exigentes. Desde la limpieza a fondo tras una reforma hasta la gestión diaria de entradas y salidas de turistas, garantizamos un estándar de calidad hotelera.
 
