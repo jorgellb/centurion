@@ -3,10 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Header/Navigation.astro';
 import Footer from '../components/Footer/Footer.astro';
 import { getCollection } from 'astro:content';
-import { CheckCircle2, ShieldCheck, Zap, ArrowRight, Star, Settings, Award } from 'lucide-astro';
+import { CheckCircle2, ShieldCheck, Zap, ArrowRight, Star, Settings, Award, Key, Hammer, Wrench, Droplets, Scissors, Eraser } from 'lucide-astro';
 
-const servicios = await getCollection('servicios');
-const mainServicios = servicios.slice(0, 6);
+const mainServicios = await getCollection('servicios');
 
 const title = "Servicios Profesionales para el Hogar";
 const description = "Servicios Vera Playa: limpieza profesional, cerrajero 24h, reformas integrales y carpintería metálica en Vera Playa, Garrucha y toda la Costa de Almería. Llámenos al 657 085 019.";
@@ -33,7 +32,7 @@ const description = "Servicios Vera Playa: limpieza profesional, cerrajero 24h, 
         </h1>
         
         <p class="text-xl text-slate-500 mb-10 leading-relaxed max-w-2xl">
-          Somos un equipo de confianza dedicado a cuidar su hogar. Ofrecemos limpieza profesional, cerrajería 24h, reformas integrales y carpintería metálica en toda la Costa de Almería.
+          Su aliado de confianza para el cuidado integral de su hogar o comunidad. Ofrecemos <strong>Multiservicios Profesionales</strong>: desde limpieza impecable y cerrajería de urgencia 24h, hasta reformas y carpintería metálica en toda la Costa de Almería.
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 mb-16">
@@ -75,23 +74,29 @@ const description = "Servicios Vera Playa: limpieza profesional, cerrajero 24h, 
   <section class="bg-slate-50 py-24 border-y border-slate-200">
     <div class="section-padding">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <h2 class="text-3xl md:text-5xl font-bold mb-6 italic">Cuidamos su hogar</h2>
-        <p class="text-slate-500">Servicios personalizados realizados con mimo y detalle por nuestro equipo de confianza.</p>
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 italic">Multiservicios para su Hogar</h2>
+        <p class="text-slate-500">Soluciones integrales realizadas con el máximo compromiso y calidad por nuestro equipo de expertos locales.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {mainServicios.map(servicio => (
-          <a href={`/servicios/${servicio.id}/`} class="linear-card group">
-            <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-900 mb-6 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
-              <Settings size={24} />
-            </div>
-            <h3 class="text-xl font-bold mb-3">{servicio.data.title}</h3>
-            <p class="text-sm text-slate-500 mb-6 line-clamp-2">{servicio.data.description}</p>
-            <div class="flex items-center text-xs font-bold uppercase tracking-wider text-slate-900 group-hover:gap-2 transition-all">
-              Leer más <ArrowRight size={14} />
-            </div>
-          </a>
-        ))}
+        {mainServicios.map(servicio => {
+          const Icon = {
+            Key, Hammer, Wrench, Settings, Droplets, Scissors, Eraser
+          }[servicio.data.icon] || Settings;
+          
+          return (
+            <a href={`/servicios/${servicio.id}/`} class="linear-card group">
+              <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-900 mb-6 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
+                <Icon size={24} />
+              </div>
+              <h3 class="text-xl font-bold mb-3">{servicio.data.title}</h3>
+              <p class="text-sm text-slate-500 mb-6 line-clamp-2">{servicio.data.description}</p>
+              <div class="flex items-center text-xs font-bold uppercase tracking-wider text-slate-900 group-hover:gap-2 transition-all">
+                Leer más <ArrowRight size={14} />
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>

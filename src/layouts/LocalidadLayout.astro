@@ -9,7 +9,7 @@ const { localidad } = Astro.props;
 const { nombre, metaTitle, metaDescription, areasCubiertas, testimonios, serviciosDestacados } = localidad.data;
 
 const allServicios = await getCollection('servicios');
-const featuredServicesData = allServicios.filter(s => serviciosDestacados.includes(s.id));
+const mainServicios = allServicios;
 ---
 
 <BaseLayout title={metaTitle} description={metaDescription}>
@@ -31,7 +31,7 @@ const featuredServicesData = allServicios.filter(s => serviciosDestacados.includ
 
       <div class="max-w-4xl">
         <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[0.9] tracking-tighter">
-          Limpieza Profesional <br/> 
+          Multiservicios <br/> 
           en <span class="premium-gradient-text italic">{nombre}</span>
         </h1>
         <div class="flex flex-wrap gap-4 mb-12">
@@ -64,11 +64,28 @@ const featuredServicesData = allServicios.filter(s => serviciosDestacados.includ
              <slot />
           </div>
 
-          <!-- Servicios Destacados en la Zona -->
           <div class="space-y-12">
-            <h2 class="text-4xl font-bold italic">Nuestros Servicios <br/> <span class="text-slate-400">más demandados en {nombre}</span></h2>
+            <div class="flex items-center justify-between flex-wrap gap-4">
+               <h2 class="text-4xl font-bold italic">Un servicio completo <br/> <span class="text-slate-400">para su hogar en {nombre}</span></h2>
+               <a href="/servicios/" class="text-sm font-bold uppercase tracking-widest text-slate-900 border-b-2 border-slate-900 pb-1">Ver todos los servicios</a>
+            </div>
+
+            <!-- Urgencias Highlight -->
+            <div class="bg-red-50 border border-red-100 rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 shadow-sm">
+               <div class="w-20 h-20 bg-red-600 text-white rounded-3xl flex items-center justify-center shrink-0 animate-pulse">
+                  <ShieldCheck size={40} />
+               </div>
+               <div class="text-center md:text-left flex-1">
+                  <h3 class="text-2xl font-bold text-red-900 mb-2">¿Urgencia en {nombre}? Cerrajero 24h</h3>
+                  <p class="text-red-700/80 mb-6">Estamos a solo unos minutos de distancia. Apertura de puertas y cerraduras en tiempo récord.</p>
+                  <a href="tel:+34657085019" class="inline-flex items-center gap-2 px-8 py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-colors">
+                     Llamar Ahora: 657 085 019
+                  </a>
+               </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {featuredServicesData.map(servicio => (
+              {mainServicios.map(servicio => (
                 <a href={`/servicios/${servicio.id}/`} class="group p-8 bg-slate-50 border border-slate-100 rounded-[2.5rem] hover:bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
                   <h3 class="text-2xl font-bold mb-4 flex items-center justify-between">
                     {servicio.data.title}
@@ -162,7 +179,7 @@ const featuredServicesData = allServicios.filter(s => serviciosDestacados.includ
       <div class="section-padding relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-24">
            <h2 class="text-4xl md:text-5xl font-bold italic mb-6">Opiniones en <span class="premium-gradient-text">{nombre}</span></h2>
-           <p class="text-slate-500">Lo que nuestros clientes de la zona dicen sobre la experiencia Vera Playa.</p>
+           <p class="text-slate-500">Lo que nuestros clientes de la zona dicen sobre la experiencia Servicios Vera Playa.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -195,8 +212,8 @@ const featuredServicesData = allServicios.filter(s => serviciosDestacados.includ
   <section class="py-24 bg-white border-t border-slate-100">
      <div class="section-padding text-center">
         <p class="text-sm text-slate-400 italic">
-           Somos tu empresa de referencia para <strong>servicios de limpieza en {nombre}</strong>. 
-           Cubrimos desde la zona de playa hasta el interior, garantizando los mejores resultados en la Costa de Almería.
+            Somos su empresa de confianza para <strong>Multiservicios en {nombre}</strong>. 
+            Desde limpieza profesional y cerrajería 24h hasta reformas y mantenimiento, cubrimos todas sus necesidades en la Costa de Almería.
         </p>
      </div>
   </section>

@@ -3,12 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Header/Navigation.astro';
 import Footer from '../../components/Footer/Footer.astro';
 import { getCollection } from 'astro:content';
-import { Settings, ArrowRight, CheckCircle2 } from 'lucide-astro';
+import { Settings, ArrowRight, CheckCircle2, Key, Hammer, Wrench, Droplets, Scissors, Eraser } from 'lucide-astro';
 
 const servicios = await getCollection('servicios');
 
-const title = "Servicios de Limpieza Profesional | Limpieza Vera Playa";
-const description = "Desde limpieza de comunidades y garajes hasta gestión de lavandería y custodia de llaves. Soluciones integrales de limpieza técnica.";
+const title = "Multiservicios para el Hogar | Servicios Vera Playa";
+const description = "Desde limpieza profesional y cerrajería 24h hasta reformas integrales y carpintería metálica. Soluciones integrales para su propiedad en Vera Playa y Garrucha.";
 ---
 
 <BaseLayout {title} {description}>
@@ -18,9 +18,9 @@ const description = "Desde limpieza de comunidades y garajes hasta gestión de l
     <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
     <div class="section-padding relative z-10">
       <div class="text-center max-w-3xl mx-auto mb-20">
-        <h1 class="text-5xl md:text-7xl font-bold mb-8 italic text-slate-900 leading-tight">Nuestra Experiencia <br/> a su Servicio</h1>
+        <h1 class="text-5xl md:text-7xl font-bold mb-8 italic text-slate-900 leading-tight">Soluciones Integrales <br/> a su Servicio</h1>
         <p class="text-xl text-slate-500 leading-relaxed italic">
-          Aplicamos los más altos estándares de higiene industrial y doméstica para garantizar resultados que superan cualquier expectativa.
+          Ofrecemos un abanico completo de servicios profesionales diseñados para mantener, proteger y mejorar su hogar o comunidad.
         </p>
       </div>
 
@@ -34,8 +34,11 @@ const description = "Desde limpieza de comunidades y garajes hasta gestión de l
                      'limpieza-cristales': '/images/servicios/limpieza-cristales.png',
                      'lavanderia': '/images/servicios/lavanderia.png',
                      'custodia-llaves': '/images/servicios/lavanderia.png',
-                     'limpieza-obra': '/images/servicios/lavanderia.png',
-                     'limpieza-garajes': '/images/servicios/mantenimiento-comunidades.png'
+                     'limpieza-obra': '/images/servicios/limpieza-obra.png',
+                     'limpieza-garajes': '/images/servicios/limpieza-garajes.png',
+                     'cerrajero-24h': '/images/servicios/mantenimiento-comunidades.png', // Fallback
+                     'reformas': '/images/servicios/limpieza-obra.png', // Fallback
+                     'carpinteria-metalica': '/images/servicios/mantenimiento-comunidades.png' // Fallback
                   };
                   return (
                      <img 
@@ -55,9 +58,16 @@ const description = "Desde limpieza de comunidades y garajes hasta gestión de l
             <div class="p-10">
                <div class="flex flex-col md:flex-row gap-8">
               <div class="shrink-0">
-                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center text-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
-                  <Settings size={32} />
-                </div>
+                {(() => {
+                  const Icon = {
+                    Key, Hammer, Wrench, Settings, Droplets, Scissors, Eraser
+                  }[serv.data.icon] || Settings;
+                  return (
+                    <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center text-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
+                      <Icon size={32} />
+                    </div>
+                  );
+                })()}
               </div>
               <div class="flex-1">
                 <h2 class="text-2xl font-bold mb-4">{serv.data.title}</h2>
