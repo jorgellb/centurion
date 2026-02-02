@@ -19,6 +19,7 @@ const serviciosCollection = defineCollection({
         })).optional(),
         products: z.array(z.object({
             title: z.string(),
+            slug: z.string(),
             description: z.string(),
             icon: z.string()
         })).optional()
