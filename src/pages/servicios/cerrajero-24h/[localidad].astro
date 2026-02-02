@@ -1,0 +1,210 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navigation from '../../../components/Header/Navigation.astro';
+import Footer from '../../../components/Footer/Footer.astro';
+import { 
+  ShieldCheck, Zap, Key, Clock, Phone, MapPin, 
+  CheckCircle2, ArrowLeft, Star, Award
+} from 'lucide-astro';
+
+export async function getStaticPaths() {
+  const localidades = await getCollection('localidades');
+  return localidades.map(loc => ({
+    params: { localidad: loc.id },
+    props: { localidad: loc }
+  }));
+}
+
+const { localidad } = Astro.props;
+const { nombre } = localidad.data;
+
+const title = `Cerrajero 24 Horas en ${nombre} | Urgencias y Aperturas`;
+const description = `Cerrajero de urgencia 24h en ${nombre}. Llegamos en menos de 30 minutos. Apertura de puertas sin daños, cambio de cerraduras y seguridad. ¡Llame ahora!`;
+---
+
+<BaseLayout {title} {description}>
+  <Navigation slot="header" />
+
+  <!-- Hero Localizado -->
+  <section class="relative py-24 bg-slate-900 text-white overflow-hidden">
+    <div class="absolute inset-0 linear-grid opacity-[0.05] pointer-events-none"></div>
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+    
+    <div class="section-padding relative z-10">
+      <a href="/servicios/cerrajero-24h/" class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors mb-12 group">
+        <ArrowLeft size={16} class="group-hover:-translate-x-1 transition-transform" />
+        Volver a Cerrajería
+      </a>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full mb-8 border border-white/10">
+            <span class="flex h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
+            <span class="text-xs font-bold uppercase tracking-widest">Disponible ahora en {nombre}</span>
+          </div>
+          
+          <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-[0.9] tracking-tighter italic">
+            Cerrajero 24h <br/> en <span class="premium-gradient-text">{nombre}</span>
+          </h1>
+          
+          <p class="text-xl text-slate-300 leading-relaxed max-w-xl italic mb-10">
+            ¿Ha perdido sus llaves o se ha quedado fuera? Somos su cerrajero de confianza en <strong>{nombre}</strong>. Servicio rápido, profesional y con precios transparentes.
+          </p>
+          
+          <div class="flex flex-wrap gap-4">
+             <a href="tel:+34657085019" class="btn-primary px-10 py-5 text-xl bg-white text-slate-900 border-white hover:bg-slate-100 shadow-xl shadow-white/5">
+                <Phone size={24} fill="currentColor" />
+                657 085 019
+             </a>
+             <a href="/presupuesto/" class="btn-secondary px-10 py-5 text-xl text-white border-white/20 hover:bg-white/10">
+                Presupuesto Gratis
+             </a>
+          </div>
+        </div>
+
+        <div class="relative">
+           <div class="aspect-square bg-white/5 rounded-[4rem] border border-white/10 p-12 backdrop-blur-sm relative overflow-hidden group rotate-2">
+              <div class="relative z-10 h-full flex flex-col justify-center gap-8">
+                 <div class="flex items-center gap-6">
+                    <div class="w-16 h-16 bg-white text-slate-900 rounded-2xl flex items-center justify-center shadow-2xl">
+                       <Clock size={32} />
+                    </div>
+                    <div>
+                       <p class="text-2xl font-bold italic">Llegada en 20-30 min</p>
+                       <p class="text-slate-400">Desplazamiento inmediato en {nombre}</p>
+                    </div>
+                 </div>
+                 <div class="flex items-center gap-6 text-right flex-row-reverse">
+                    <div class="w-16 h-16 bg-white text-slate-900 rounded-2xl flex items-center justify-center shadow-2xl">
+                       <ShieldCheck size={32} />
+                    </div>
+                    <div>
+                       <p class="text-2xl font-bold italic">Sin Daños</p>
+                       <p class="text-slate-400">Técnicas de apertura no invasivas</p>
+                    </div>
+                 </div>
+                 <div class="flex items-center gap-6">
+                    <div class="w-16 h-16 bg-white text-slate-900 rounded-2xl flex items-center justify-center shadow-2xl">
+                       <Award size={32} />
+                    </div>
+                    <div>
+                       <p class="text-2xl font-bold italic">Garantía por Escrito</p>
+                       <p class="text-slate-400">Tranquilidad total en cada servicio</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido SEO Localizado -->
+  <section class="py-24 bg-white relative">
+    <div class="section-padding">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+        <div class="lg:col-span-2">
+          <div class="prose prose-slate prose-xl max-w-none mb-16">
+            <h2 class="text-4xl font-bold italic mb-8">Su cerrajero de urgencia en <span class="premium-gradient-text">{nombre}</span></h2>
+            <p>
+              En <strong>Multiservicios Vera Playa</strong>, entendemos que una urgencia de cerrajería no puede esperar. Por eso, hemos desplegado un equipo técnico permanente en la zona de <strong>{nombre}</strong> para garantizar tiempos de respuesta récord.
+            </p>
+            <p>
+              Ya sea que necesite una apertura de puerta un domingo por la noche, o quiera actualizar la seguridad de su segunda residencia en la costa, nuestro equipo le atenderá con la máxima profesionalidad y discreción.
+            </p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 italic">Servicios en {nombre}:</h3>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 list-none p-0">
+               <li class="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                  <CheckCircle2 size={20} class="text-slate-900" />
+                  <span class="font-medium">Apertura de Puertas 24h</span>
+               </li>
+               <li class="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                  <CheckCircle2 size={20} class="text-slate-900" />
+                  <span class="font-medium">Cambio de Cerraduras y Bombines</span>
+               </li>
+               <li class="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                  <CheckCircle2 size={20} class="text-slate-900" />
+                  <span class="font-medium">Sistemas Antibumping y Alta Seguridad</span>
+               </li>
+               <li class="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                  <CheckCircle2 size={20} class="text-slate-900" />
+                  <span class="font-medium">Apertura de Cajas Fuertes</span>
+               </li>
+               <li class="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                  <CheckCircle2 size={20} class="text-slate-900" />
+                  <span class="font-medium">Reparación de Persianas Metálicas</span>
+               </li>
+               <li class="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                  <CheckCircle2 size={20} class="text-slate-900" />
+                  <span class="font-medium">Apertura de Vehículos</span>
+               </li>
+            </ul>
+          </div>
+
+          <!-- Testimonio Local -->
+          <div class="p-12 bg-slate-50 rounded-[3rem] border border-slate-100 relative overflow-hidden mb-16">
+             <Star size={40} class="absolute -top-4 -right-4 text-slate-200" />
+             <div class="relative z-10 italic text-2xl text-slate-600 leading-relaxed mb-8">
+                "Excelente servicio. Se me olvidaron las llaves puestas por dentro en mi piso de {nombre} y en 20 minutos estaban allí. Abrieron sin romper nada y fueron muy amables. El precio, muy correcto para ser una urgencia."
+             </div>
+             <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold">J</div>
+                <div>
+                   <p class="font-bold text-slate-900">Juan M.</p>
+                   <p class="text-sm text-slate-400">Residente en {nombre}</p>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-1">
+          <div class="p-8 bg-slate-900 text-white rounded-[2.5rem] sticky top-28 shadow-2xl">
+             <h3 class="text-2xl font-bold mb-6 italic">¿Necesita un <br/> Cerrajero ahora?</h3>
+             <p class="text-slate-400 mb-8 italic">Estamos operativos en <strong>{nombre}</strong> en este momento.</p>
+             
+             <div class="space-y-6 mb-10">
+                <div class="flex items-center gap-4">
+                   <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white">
+                      <Zap size={20} />
+                   </div>
+                   <span class="text-sm">Respuesta rápida inmediata</span>
+                </div>
+                <div class="flex items-center gap-4">
+                   <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white">
+                      <ShieldCheck size={20} />
+                   </div>
+                   <span class="text-sm">Profesionales acreditados</span>
+                </div>
+                <div class="flex items-center gap-4">
+                   <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white">
+                      <Phone size={20} />
+                   </div>
+                   <span class="text-sm">Atención telefónica directa</span>
+                </div>
+             </div>
+
+             <a href="tel:+34657085019" class="btn-secondary w-full justify-center py-5 text-xl bg-white text-slate-900 hover:bg-slate-50 group">
+                Llamar 657 085 019
+                <Zap size={20} fill="currentColor" class="group-hover:scale-125 transition-transform" />
+             </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="py-24 bg-slate-50">
+    <div class="section-padding">
+       <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl md:text-6xl font-bold mb-8 italic">Confianza y Seguridad en <span class="premium-gradient-text">{nombre}</span></h2>
+          <p class="text-xl text-slate-500 mb-12 italic">Cientos de aperturas realizadas con éxito avalan nuestro compromiso con la zona de la costa.</p>
+          <a href="/presupuesto/" class="btn-primary px-12 py-5 text-xl">Solicitar Información Avanzada</a>
+       </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

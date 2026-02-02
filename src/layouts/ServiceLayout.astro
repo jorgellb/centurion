@@ -6,11 +6,14 @@ import {
   Settings, CheckCircle2, ShieldCheck, Zap, Users, 
   Layout, Maximize, Sun, Layers, Grid, Lock, 
   Smartphone, EyeOff, Scissors, ShoppingBag, ArrowRight,
-  Droplets, Box, Hotel
+  Droplets, Box, Hotel, MapPin
 } from 'lucide-astro';
+import { getCollection } from 'astro:content';
 
+const localities = await getCollection('localidades');
 const { servicio } = Astro.props;
 const { title, metaTitle, metaDescription, description, features, priceRange, faq, products } = servicio.data;
+const isCerrajero = servicio.id === 'cerrajero-24h';
 ---
 
 <BaseLayout title={metaTitle} description={metaDescription}>
@@ -157,6 +160,37 @@ const { title, metaTitle, metaDescription, description, features, priceRange, fa
                       </div>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Locality Cards for Cerrajero 24h -->
+          {isCerrajero && (
+            <div class="space-y-12 pt-24 border-t border-slate-100">
+               <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                  <h2 class="text-4xl md:text-5xl font-bold italic text-slate-900 mb-2">Cerrajero 24h por <span class="premium-gradient-text">Localidad</span></h2>
+                  <p class="text-slate-500 italic">Atención rápida y profesional en su zona de residencia.</p>
+                </div>
+                <div class="hidden md:block h-px flex-1 bg-slate-100 mx-8 mb-4"></div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {localities.map(loc => (
+                  <a href={`/servicios/cerrajero-24h/${loc.id}/`} class="group relative p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:bg-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-slate-900/5 rounded-bl-[100%] transition-transform group-hover:scale-110 duration-700"></div>
+                    <div class="relative z-10">
+                      <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-slate-900 shadow-sm mb-6 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
+                        <MapPin size={24} />
+                      </div>
+                      <h3 class="text-2xl font-bold mb-3 italic">Cerrajero 24h en <br/> <span class="premium-gradient-text">{loc.data.nombre}</span></h3>
+                      <p class="text-slate-500 text-sm italic mb-6">Cerrajero de urgencia disponible las 24 horas en {loc.data.nombre} y alrededores.</p>
+                      <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-900">
+                        Ver Servicio Local <ArrowRight size={14} class="group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </a>
                 ))}
               </div>
             </div>
