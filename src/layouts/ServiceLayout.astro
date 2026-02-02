@@ -88,27 +88,39 @@ const { title, metaTitle, metaDescription, description, features, priceRange, fa
 
           <!-- Catalog / Products Section (Spectacular Cards) -->
           {products && products.length > 0 && (
-            <div class="space-y-12 pt-16 border-t border-slate-100">
-              <h2 class="text-4xl font-bold italic mb-12 text-slate-900">Catálogo de <span class="text-slate-400">Soluciones</span></h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div class="space-y-12 pt-24 border-t border-slate-100">
+              <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                  <h2 class="text-4xl md:text-5xl font-bold italic text-slate-900 mb-2">Catálogo de <span class="premium-gradient-text">Soluciones</span></h2>
+                  <p class="text-slate-500 italic">Diseño, seguridad y eficiencia en cada detalle.</p>
+                </div>
+                <div class="hidden md:block h-px flex-1 bg-slate-100 mx-8 mb-4"></div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 {products.map(product => {
                   const Icon = {
                     Layout, Maximize, Sun, Zap, ShieldCheck, Layers, Grid, Lock, Smartphone, EyeOff, Scissors, ShoppingBag, Droplets, Box, Hotel
                   }[product.icon] || Settings;
 
                   return (
-                    <div class="group relative p-8 bg-white border border-slate-100 rounded-[2.5rem] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-                      <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-[100%] transition-colors group-hover:bg-slate-900/5"></div>
+                    <div class="group service-card bg-white hover:bg-slate-50/30 transition-all duration-500">
+                      <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-[100%] transition-transform group-hover:scale-110 duration-700"></div>
                       <div class="relative z-10">
-                        <div class="w-14 h-14 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center text-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500 mb-6">
-                          <Icon size={28} />
+                        <div class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-slate-900/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 mb-8">
+                          <Icon size={32} />
                         </div>
-                        <h3 class="text-xl font-bold mb-4 leading-snug">{product.title}</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed italic mb-6">
+                        <h3 class="text-xl font-bold mb-4 leading-snug text-slate-900 group-hover:text-black transition-colors">{product.title}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed italic mb-8 group-hover:text-slate-700 transition-colors">
                           {product.description}
                         </p>
-                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-900 opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all">
-                          Saber más <ArrowRight size={14} />
+                        <div class="flex items-center justify-between">
+                          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-900">
+                            Detalles <ArrowRight size={14} class="group-hover:translate-x-1 transition-transform" />
+                          </div>
+                          <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
+                            <Zap size={14} />
+                          </div>
                         </div>
                       </div>
                     </div>

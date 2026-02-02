@@ -68,3 +68,12 @@
 .frosted-glass {
   @apply backdrop-blur-md bg-white/70 border-b border-white/20;
 }
+
+.service-card {
+  @apply relative p-8 bg-white border border-slate-100 rounded-[2.5rem] transition-all duration-500 overflow-hidden;
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.05);
+}
+
+.service-card:hover {
+  @apply shadow-2xl -translate-y-2;
+}

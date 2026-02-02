@@ -16,6 +16,11 @@ const serviciosCollection = defineCollection({
         faq: z.array(z.object({
             question: z.string(),
             answer: z.string()
+        })).optional(),
+        products: z.array(z.object({
+            title: z.string(),
+            description: z.string(),
+            icon: z.string()
         })).optional()
     })
 });
