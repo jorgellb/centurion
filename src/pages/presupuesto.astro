@@ -23,10 +23,14 @@ const description = "Solicita un presupuesto a medida para la limpieza y manteni
       </div>
 
       <div class="max-w-4xl mx-auto">
-         <div class="bg-white border border-slate-100 shadow-2xl rounded-[3rem] p-8 md:p-16 relative overflow-hidden">
+          <div class="bg-white border border-slate-100 shadow-2xl rounded-[3rem] p-8 md:p-16 relative overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-[100%] opacity-50"></div>
             
-            <form class="space-y-12 relative z-10">
+            <form action="https://formsubmit.co/info@multiserviciosveraplaya.com" method="POST" class="space-y-12 relative z-10">
+               <input type="hidden" name="_subject" value="Nueva Solicitud de Presupuesto - Web">
+               <input type="hidden" name="_next" value="https://limpiezaveraplaya.com/gracias/">
+               <input type="hidden" name="_captcha" value="false">
+
                <!-- Paso 1: Localización -->
                <div class="space-y-6">
                   <h3 class="flex items-center gap-3 text-2xl font-bold">
@@ -36,24 +40,28 @@ const description = "Solicita un presupuesto a medida para la limpieza y manteni
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div class="space-y-2">
                         <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Localidad</label>
-                        <select class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-slate-900 transition-all font-medium">
-                           <option>Vera Playa</option>
-                           <option>Garrucha</option>
-                           <option>Puerto Rey</option>
-                           <option>Villaricos</option>
-                           <option>Palomares</option>
+                        <select name="localidad" class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-slate-900 transition-all font-medium">
+                           <option value="Vera Playa">Vera Playa</option>
+                           <option value="Garrucha">Garrucha</option>
+                           <option value="Puerto Rey">Puerto Rey</option>
+                           <option value="Villaricos">Villaricos</option>
+                           <option value="Palomares">Palomares</option>
                         </select>
                      </div>
                      <div class="space-y-2">
                         <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Tipo de Propiedad</label>
-                        <select class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-slate-900 transition-all font-medium">
-                           <option>Apartamento Vacacional</option>
-                           <option>Comunidad de Vecinos</option>
-                           <option>Villa/Chalet</option>
-                           <option>Local Comercial</option>
-                           <option>Garaje/Parking</option>
+                        <select name="propiedad" class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-slate-900 transition-all font-medium">
+                           <option value="Apartamento Vacacional">Apartamento Vacacional</option>
+                           <option value="Comunidad de Vecinos">Comunidad de Vecinos</option>
+                           <option value="Villa/Chalet">Villa/Chalet</option>
+                           <option value="Local Comercial">Local Comercial</option>
+                           <option value="Garaje/Parking">Garaje/Parking</option>
                         </select>
                      </div>
+                  </div>
+                  <div class="space-y-2">
+                     <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Email de Contacto</label>
+                     <input type="email" name="email" required placeholder="Su email para recibir el presupuesto" class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-slate-900 transition-all font-medium" />
                   </div>
                </div>
 
@@ -66,7 +74,7 @@ const description = "Solicita un presupuesto a medida para la limpieza y manteni
                   <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
                      {['Limpieza General', 'Cerrajería 24h', 'Reformas', 'Carpintería', 'Cristales', 'Lavandería', 'Custodia de Llaves', 'Mantenimiento'].map(serv => (
                         <label class="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl cursor-pointer hover:bg-slate-100 transition-all group">
-                           <input type="checkbox" class="w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-900" />
+                           <input type="checkbox" name="servicios[]" value={serv} class="w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-900" />
                            <span class="text-sm font-medium text-slate-600 group-hover:text-slate-900">{serv}</span>
                         </label>
                      ))}
@@ -80,7 +88,7 @@ const description = "Solicita un presupuesto a medida para la limpieza y manteni
                      Detalles Adicionales
                   </h3>
                   <div class="space-y-2">
-                     <textarea rows="4" class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-slate-900 transition-all" placeholder="Metros cuadrados aproximados, urgencia, descripción del trabajo..."></textarea>
+                     <textarea name="detalles" rows="4" class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-slate-900 transition-all" placeholder="Metros cuadrados aproximados, urgencia, descripción del trabajo..."></textarea>
                   </div>
                </div>
 
@@ -89,7 +97,7 @@ const description = "Solicita un presupuesto a medida para la limpieza y manteni
                      <ShieldCheck size={20} class="text-slate-900" />
                      Garantizamos confidencialidad absoluta
                   </div>
-                  <button class="btn-primary px-12 py-5 text-xl w-full md:w-auto">
+                  <button type="submit" class="btn-primary px-12 py-5 text-xl w-full md:w-auto">
                      Enviar Solicitud
                      <ArrowRight size={24} />
                   </button>

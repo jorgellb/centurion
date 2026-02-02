@@ -53,32 +53,36 @@ const description = "Contacta con Multiservicios Vera Playa para cualquier consu
         </div>
 
         <div class="bg-slate-50 border border-slate-100 rounded-[3rem] p-8 md:p-12">
-          <form class="space-y-6">
+          <form action="https://formsubmit.co/info@multiserviciosveraplaya.com" method="POST" class="space-y-6">
+            <input type="hidden" name="_subject" value="Nuevo Mensaje de Contacto - Web">
+            <input type="hidden" name="_next" value="https://limpiezaveraplaya.com/gracias/">
+            <input type="hidden" name="_captcha" value="false">
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                <div class="space-y-2">
                   <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Nombre Completo</label>
-                  <input type="text" class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all" placeholder="Juan Pérez" />
+                  <input type="text" name="nombre" required class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all" placeholder="Juan Pérez" />
                </div>
                <div class="space-y-2">
                   <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Email</label>
-                  <input type="email" class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all" placeholder="juan@ejemplo.com" />
+                  <input type="email" name="email" required class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all" placeholder="juan@ejemplo.com" />
                </div>
             </div>
             <div class="space-y-2">
                <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">¿Cómo podemos ayudarte?</label>
-               <select class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all appearance-none">
-                  <option>Limpieza General</option>
-                  <option>Cerrajería 24h</option>
-                  <option>Reformas / Carpintería</option>
-                  <option>Comunidades</option>
-                  <option>Gestión Vacacional</option>
+               <select name="asunto" class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all appearance-none">
+                  <option value="Limpieza General">Limpieza General</option>
+                  <option value="Cerrajería 24h">Cerrajería 24h</option>
+                  <option value="Reformas / Carpintería">Reformas / Carpintería</option>
+                  <option value="Comunidades">Comunidades</option>
+                  <option value="Gestión Vacacional">Gestión Vacacional</option>
                </select>
             </div>
             <div class="space-y-2">
                <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Mensaje</label>
-               <textarea rows="4" class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all" placeholder="Cuéntanos más sobre tus necesidades..."></textarea>
+               <textarea name="mensaje" required rows="4" class="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-900/5 focus:border-slate-900 transition-all" placeholder="Cuéntanos más sobre tus necesidades..."></textarea>
             </div>
-            <button class="btn-primary w-full justify-center py-5 text-lg">Enviar Mensaje</button>
+            <button type="submit" class="btn-primary w-full justify-center py-5 text-lg">Enviar Mensaje</button>
             <p class="text-[10px] text-center text-slate-400">Al enviar este formulario, acepta nuestra política de privacidad y protección de datos.</p>
           </form>
         </div>
