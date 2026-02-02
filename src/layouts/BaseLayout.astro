@@ -1,5 +1,7 @@
 ﻿---
 import '../styles/global.css';
+import CookieBanner from '../components/CookieBanner.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 interface Props {
   title: string;
@@ -15,7 +17,7 @@ const {
   image = '/images/og-main.jpg'
 } = Astro.props;
 
-const siteName = "Limpieza Vera Playa";
+const siteName = "Servicios Vera Playa";
 ---
 
 <!doctype html>
@@ -56,6 +58,12 @@ const siteName = "Limpieza Vera Playa";
       <slot />
     </main>
     <slot name="footer" />
+    
+    <!-- WhatsApp Floating Button -->
+    <WhatsAppButton />
+    
+    <!-- Cookie Consent Banner -->
+    <CookieBanner />
     
     <style is:global>
       :root {

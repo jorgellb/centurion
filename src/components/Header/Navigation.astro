@@ -1,5 +1,5 @@
 ﻿---
-import { Search, MapPin, Menu, X, Phone } from 'lucide-astro';
+import { Search, MapPin, Menu, X, Phone, MessageCircle } from 'lucide-astro';
 
 const navItems = [
   { label: 'Servicios', href: '/servicios/' },
@@ -14,10 +14,10 @@ const navItems = [
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 group">
       <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white rotate-3 group-hover:rotate-0 transition-transform duration-300">
-        <span class="font-bold text-xl leading-none">L</span>
+        <span class="font-bold text-xl leading-none">S</span>
       </div>
       <div class="flex flex-col">
-        <span class="font-heading font-bold text-xl leading-none">Limpieza <br/> Vera Playa</span>
+        <span class="font-heading font-bold text-xl leading-none">Servicios <br/> Vera Playa</span>
       </div>
     </a>
 
@@ -36,9 +36,13 @@ const navItems = [
 
     <!-- Actions -->
     <div class="hidden md:flex items-center gap-4">
-      <a href="tel:+34600000000" class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900">
+      <a href="tel:+34657085019" class="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900">
         <Phone size={18} />
-        <span>600 000 000</span>
+        <span>657 085 019</span>
+      </a>
+      <a href="https://wa.me/34657085019" target="_blank" rel="noopener" class="flex items-center gap-2 text-sm font-medium text-green-600 hover:text-green-700">
+        <MessageCircle size={18} />
+        <span>WhatsApp</span>
       </a>
       <a href="/presupuesto/" class="btn-primary py-2.5 px-6">
         Pedir Presupuesto
@@ -71,9 +75,13 @@ const navItems = [
       ))}
     </nav>
     <div style="margin-top: auto; padding-top: 32px; display: flex; flex-direction: column; gap: 16px;">
-      <a href="tel:+34600000000" style="display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 18px; font-weight: 500; color: #334155; padding: 16px; background: #f8fafc; border-radius: 12px; text-decoration: none;">
+      <a href="tel:+34657085019" style="display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 18px; font-weight: 500; color: #334155; padding: 16px; background: #f8fafc; border-radius: 12px; text-decoration: none;">
         <Phone size={20} />
-        <span>600 000 000</span>
+        <span>657 085 019</span>
+      </a>
+      <a href="https://wa.me/34657085019" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 18px; font-weight: 500; color: white; padding: 16px; background: #25D366; border-radius: 12px; text-decoration: none;">
+        <MessageCircle size={20} />
+        <span>WhatsApp</span>
       </a>
       <a href="/presupuesto/" class="btn-primary" style="width: 100%; justify-content: center; padding: 18px; font-size: 18px;">
         Pedir Presupuesto

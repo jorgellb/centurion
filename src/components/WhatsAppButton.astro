@@ -1,0 +1,46 @@
+---
+// Floating WhatsApp Button
+import { MessageCircle } from 'lucide-astro';
+
+const phoneNumber = '34657085019';
+const message = 'Hola, me gustaría solicitar información sobre vuestros servicios.';
+const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+---
+
+<a 
+  href={whatsappUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 group"
+  aria-label="Contactar por WhatsApp"
+>
+  <MessageCircle size={32} class="text-white" />
+  
+  <!-- Tooltip -->
+  <span class="absolute right-full mr-3 px-4 py-2 bg-slate-900 text-white text-sm font-medium rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+    ¡Escríbenos!
+  </span>
+</a>
+
+<style>
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #25D366;
+    animation: pulse-ring 2s ease-out infinite;
+    z-index: -1;
+  }
+</style>
