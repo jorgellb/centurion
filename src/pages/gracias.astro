@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Header/Navigation.astro';
+import Footer from '../components/Footer/Footer.astro';
+import { CheckCircle, Home, Phone } from 'lucide-astro';
+
+const title = "¡Gracias por contactar! | Multiservicios Vera Playa";
+const description = "Su mensaje ha sido enviado correctamente. Nos pondremos en contacto con usted en breve.";
+---
+
+<BaseLayout {title} {description}>
+  <Navigation slot="header" />
+
+  <section class="min-h-[80vh] flex items-center justify-center bg-white relative overflow-hidden py-24">
+    <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
+    <!-- Círculos decorativos -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-slate-50 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute top-0 right-0 w-64 h-64 bg-slate-100 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl -z-10"></div>
+    
+    <div class="section-padding relative z-10 text-center max-w-2xl mx-auto">
+        
+        <div class="mb-12 relative inline-block">
+            <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center text-green-600 animate-bounce mx-auto">
+                <CheckCircle size={48} stroke-width={3} />
+            </div>
+            <div class="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-20"></div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-bold mb-8 italic">
+            ¡Mensaje <span class="premium-gradient-text">Enviado!</span>
+        </h1>
+        
+        <p class="text-xl text-slate-500 mb-12 italic leading-relaxed">
+            Hemos recibido su solicitud correctamente. Nuestro equipo revisará su mensaje y nos pondremos en contacto con usted en un plazo máximo de <span class="text-slate-900 font-bold">24 horas</span>.
+        </p>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+            <a href="/" class="btn-primary px-8 py-4 flex items-center gap-3 w-full md:w-auto justify-center">
+                <Home size={20} />
+                Volver al Inicio
+            </a>
+            <a href="tel:+34657085019" class="px-8 py-4 rounded-xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-colors flex items-center gap-3 w-full md:w-auto justify-center">
+                <Phone size={20} />
+                Llamar ahora: 657 085 019
+            </a>
+        </div>
+
+        <div class="mt-16 pt-16 border-t border-slate-100">
+            <p class="text-sm text-slate-400 italic">Si se trata de una urgencia de cerrajería, por favor llámenos directamente para atención inmediata.</p>
+        </div>
+
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
