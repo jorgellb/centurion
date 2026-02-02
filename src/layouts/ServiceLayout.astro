@@ -2,10 +2,14 @@
 import BaseLayout from './BaseLayout.astro';
 import Navigation from '../components/Header/Navigation.astro';
 import Footer from '../components/Footer/Footer.astro';
-import { Settings, CheckCircle2, ShieldCheck, Zap, Users } from 'lucide-astro';
+import { 
+  Settings, CheckCircle2, ShieldCheck, Zap, Users, 
+  Layout, Maximize, Sun, Layers, Grid, Lock, 
+  Smartphone, EyeOff, Scissors, ShoppingBag, ArrowRight
+} from 'lucide-astro';
 
 const { servicio } = Astro.props;
-const { title, metaTitle, metaDescription, description, features, priceRange, faq } = servicio.data;
+const { title, metaTitle, metaDescription, description, features, priceRange, faq, products } = servicio.data;
 ---
 
 <BaseLayout title={metaTitle} description={metaDescription}>
@@ -34,7 +38,6 @@ const { title, metaTitle, metaDescription, description, features, priceRange, fa
         <div class="relative">
           <div class="aspect-[4/3] bg-slate-100 rounded-[3rem] overflow-hidden border border-slate-200 shadow-2xl rotate-2">
             {(() => {
-                // Map services to specific safe/human images
                 const imageMap = {
                     'mantenimiento-comunidades': '/images/servicios/mantenimiento-comunidades.png',
                     'limpieza-cristales': '/images/servicios/limpieza-cristales.png',
@@ -59,47 +62,87 @@ const { title, metaTitle, metaDescription, description, features, priceRange, fa
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
             <div class="absolute bottom-8 left-8 text-white">
                <p class="text-xs uppercase tracking-[0.2em] font-bold mb-2">Trato Cercano</p>
-               <p class="text-2xl font-bold italic">Su hogar, <br/> en buenas manos.</p>
+               <p class="text-2xl font-bold italic">Calidad superior, <br/> garantizada.</p>
             </div>
           </div>
           <div class="absolute -bottom-6 -left-6 p-6 bg-white shadow-xl rounded-2xl border border-slate-100 flex items-center gap-4 -rotate-3">
              <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white">
-                <Users size={20} />
+                <ShieldCheck size={20} />
              </div>
              <div>
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Equipo de 2</p>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Respuesta Rápida</p>
                 <p class="text-sm font-bold">Confianza Total</p>
              </div>
           </div>
         </div>
       </div>
 
+      <!-- Content Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 mt-20">
         <!-- Main Content -->
         <div class="lg:col-span-2 space-y-16">
-          <div class="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:font-heading prose-p:text-slate-600 prose-strong:text-slate-900">
+          <div class="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:font-heading prose-p:text-slate-600 prose-strong:text-slate-900 border-l-4 border-slate-900 pl-8">
              <slot />
           </div>
 
-          <!-- Features Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {features.map(feature => (
-              <div class="flex items-start gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-100 italic">
-                <CheckCircle2 size={24} class="text-slate-900 shrink-0" />
-                <span class="font-medium text-slate-700">{feature}</span>
-              </div>
-            ))}
-          </div>
+          <!-- Catalog / Products Section (Spectacular Cards) -->
+          {products && products.length > 0 && (
+            <div class="space-y-12 pt-16 border-t border-slate-100">
+              <h2 class="text-4xl font-bold italic mb-12 text-slate-900">Catálogo de <span class="text-slate-400">Soluciones</span></h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {products.map(product => {
+                  const Icon = {
+                    Layout, Maximize, Sun, Zap, ShieldCheck, Layers, Grid, Lock, Smartphone, EyeOff, Scissors, ShoppingBag
+                  }[product.icon] || Settings;
 
-          <!-- FAQ if exists -->
+                  return (
+                    <div class="group relative p-8 bg-white border border-slate-100 rounded-[2.5rem] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                      <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-[100%] transition-colors group-hover:bg-slate-900/5"></div>
+                      <div class="relative z-10">
+                        <div class="w-14 h-14 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center text-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500 mb-6">
+                          <Icon size={28} />
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">{product.title}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed italic mb-6">
+                          {product.description}
+                        </p>
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-900 opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all">
+                          Saber más <ArrowRight size={14} />
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          <!-- Features Grid (Original) -->
+          {!products && (
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-16 border-t border-slate-100">
+              {features.map(feature => (
+                <div class="flex items-start gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-100 italic">
+                  <CheckCircle2 size={24} class="text-slate-900 shrink-0" />
+                  <span class="font-medium text-slate-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <!-- FAQ Premium -->
           {faq && faq.length > 0 && (
-            <div class="space-y-8 pt-16 border-t border-slate-100">
-              <h3 class="text-3xl font-bold italic">Preguntas Frecuentes</h3>
-              <div class="space-y-6">
-                {faq.map(item => (
-                  <div class="linear-card">
-                    <h4 class="font-bold text-lg mb-3">{item.question}</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed">{item.answer}</p>
+            <div class="space-y-12 pt-16 border-t border-slate-100">
+              <h3 class="text-3xl font-bold italic">Razones para elegir Aluminio</h3>
+              <div class="grid grid-cols-1 gap-6">
+                {faq.map((item, index) => (
+                  <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-start gap-6">
+                      <span class="text-4xl font-bold text-slate-200">{(index + 1).toString().padStart(2, '0')}</span>
+                      <div>
+                        <h4 class="font-bold text-xl mb-3 text-slate-900">{item.question}</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed italic">{item.answer}</p>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
