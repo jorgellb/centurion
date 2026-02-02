@@ -1,0 +1,148 @@
+﻿---
+import BaseLayout from './BaseLayout.astro';
+import Navigation from '../components/Header/Navigation.astro';
+import Footer from '../components/Footer/Footer.astro';
+import { Settings, CheckCircle2, ShieldCheck, Zap, Users } from 'lucide-astro';
+
+const { servicio } = Astro.props;
+const { title, metaTitle, metaDescription, description, features, priceRange, faq } = servicio.data;
+---
+
+<BaseLayout title={metaTitle} description={metaDescription}>
+  <Navigation slot="header" />
+
+  <section class="relative py-24 bg-white overflow-hidden">
+    <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
+    <div class="section-padding relative z-10">
+      <nav class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-slate-400 mb-8">
+         <a href="/" class="hover:text-slate-900 transition-colors">Inicio</a>
+         <span>/</span>
+         <a href="/servicios/" class="hover:text-slate-900 transition-colors">Servicios</a>
+         <span>/</span>
+         <span class="text-slate-900">{title}</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h1 class="text-5xl md:text-8xl font-bold mb-8 leading-[0.9] tracking-tighter">
+            <span class="premium-gradient-text italic">{title}</span>
+          </h1>
+          <p class="text-xl text-slate-500 leading-relaxed max-w-2xl italic">
+            {description}
+          </p>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] bg-slate-100 rounded-[3rem] overflow-hidden border border-slate-200 shadow-2xl rotate-2">
+            {(() => {
+                // Map services to specific safe/human images
+                const imageMap = {
+                    'mantenimiento-comunidades': '/images/servicios/mantenimiento-comunidades.png',
+                    'limpieza-cristales': '/images/servicios/limpieza-cristales.png',
+                    'lavanderia': '/images/servicios/lavanderia.png',
+                    'custodia-llaves': '/images/servicios/lavanderia.png', // Show a clean home
+                    'limpieza-obra': '/images/servicios/lavanderia.png', // Show the result (clean home)
+                    'limpieza-garajes': '/images/servicios/mantenimiento-comunidades.png' // Show clean community areas instead of machines
+                };
+                const imageSrc = imageMap[servicio.id] || '/images/servicios/lavanderia.png';
+                
+                return (
+                    <img 
+                    src={imageSrc} 
+                    alt={title}
+                    class="w-full h-full object-cover"
+                    />
+                );
+            })()}
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            <div class="absolute bottom-8 left-8 text-white">
+               <p class="text-xs uppercase tracking-[0.2em] font-bold mb-2">Trato Cercano</p>
+               <p class="text-2xl font-bold italic">Su hogar, <br/> en buenas manos.</p>
+            </div>
+          </div>
+          <div class="absolute -bottom-6 -left-6 p-6 bg-white shadow-xl rounded-2xl border border-slate-100 flex items-center gap-4 -rotate-3">
+             <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white">
+                <Users size={20} />
+             </div>
+             <div>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Equipo de 2</p>
+                <p class="text-sm font-bold">Confianza Total</p>
+             </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 mt-20">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-16">
+          <div class="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:font-heading prose-p:text-slate-600 prose-strong:text-slate-900">
+             <slot />
+          </div>
+
+          <!-- Features Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {features.map(feature => (
+              <div class="flex items-start gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-100 italic">
+                <CheckCircle2 size={24} class="text-slate-900 shrink-0" />
+                <span class="font-medium text-slate-700">{feature}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- FAQ if exists -->
+          {faq && faq.length > 0 && (
+            <div class="space-y-8 pt-16 border-t border-slate-100">
+              <h3 class="text-3xl font-bold italic">Preguntas Frecuentes</h3>
+              <div class="space-y-6">
+                {faq.map(item => (
+                  <div class="linear-card">
+                    <h4 class="font-bold text-lg mb-3">{item.question}</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Sidebar Actions -->
+        <div class="space-y-8">
+          <div class="bg-slate-900 text-white rounded-[2rem] p-10 sticky top-28">
+             <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                  <Settings size={24} />
+                </div>
+                <div>
+                  <p class="text-xs uppercase tracking-widest font-bold text-slate-400">Servicio Profesional</p>
+                  <p class="font-bold">Solicitar presupuesto</p>
+                </div>
+             </div>
+             
+             {priceRange && (
+               <div class="mb-8">
+                 <p class="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Precio aproximado</p>
+                 <p class="text-3xl font-bold">{priceRange}</p>
+               </div>
+             )}
+
+             <a href="/presupuesto/" class="btn-secondary w-full justify-center py-4 text-lg">
+                Reservar Ahora
+             </a>
+
+             <div class="mt-10 space-y-4 pt-10 border-t border-white/10">
+                <div class="flex gap-3 text-xs text-slate-400">
+                   <ShieldCheck size={16} class="text-blue-400" />
+                   <span>Garantía de calidad Profesional</span>
+                </div>
+                <div class="flex gap-3 text-xs text-slate-400">
+                   <Zap size={16} class="text-yellow-400" />
+                   <span>Atención prioritaria 24/7</span>
+                </div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

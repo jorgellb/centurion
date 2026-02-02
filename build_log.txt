@@ -1,0 +1,61 @@
+﻿
+> limpieza-costa-almeria@0.0.1 build
+> astro build
+
+[2m19:33:02[22m [34m[content][39m Syncing content
+[2m19:33:02[22m [34m[content][39m Content config changed
+[2m19:33:02[22m [34m[content][39m Clearing content store
+node.exe : [31m[InvalidConte
+ntEntryDataError][39m 
+[1mlocalidades ÔåÆ 
+puerto-rey[22m data does 
+not match collection schema.
+En línea: 1 Carácter: 1
++ & "C:\Program 
+Files\nodejs/node.exe" "C:\Us
+ers\jorge\AppData\Roaming\ 
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: ([31m[I  
+  nvalidCo...lection schem   
+ a.:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+
+  [1mslug**: **slug[22m: 
+Required
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs
+.astro.build/en/guides/conten
+t-collections/[24m for more 
+information on content 
+schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.ast
+ro.build/en/reference/errors/
+invalid-content-entry-data-er
+ror/[24m[39m
+  [1mLocation:[22m
+    [4mC:\Users\jorge\Docume
+nts\cloudflare\limpieza-costa
+-almeria\src\content\localida
+des\puerto-rey.md:0:0[24m
+  [1mStack trace:[22m
+[2m    at 
+getEntryDataAndImages (file:/
+//C:/Users/jorge/Documents/cl
+oudflare/limpieza-costa-almer
+ia/node_modules/astro/dist/co
+ntent/utils.js:168:26)
+    at async syncData (file:/
+//C:/Users/jorge/Documents/cl
+oudflare/limpieza-costa-almer
+ia/node_modules/astro/dist/co
+ntent/loaders/glob.js:94:28)
+[22m

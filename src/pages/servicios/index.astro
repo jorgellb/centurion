@@ -1,0 +1,88 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Header/Navigation.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import { getCollection } from 'astro:content';
+import { Settings, ArrowRight, CheckCircle2 } from 'lucide-astro';
+
+const servicios = await getCollection('servicios');
+
+const title = "Servicios de Limpieza Profesional | Limpieza Vera Playa";
+const description = "Desde limpieza de comunidades y garajes hasta gestión de lavandería y custodia de llaves. Soluciones integrales de limpieza técnica.";
+---
+
+<BaseLayout {title} {description}>
+  <Navigation slot="header" />
+
+  <section class="py-24 bg-white relative">
+    <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
+    <div class="section-padding relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <h1 class="text-5xl md:text-7xl font-bold mb-8 italic text-slate-900 leading-tight">Nuestra Experiencia <br/> a su Servicio</h1>
+        <p class="text-xl text-slate-500 leading-relaxed italic">
+          Aplicamos los más altos estándares de higiene industrial y doméstica para garantizar resultados que superan cualquier expectativa.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {servicios.map(serv => (
+          <a href={`/servicios/${serv.id}/`} class="linear-card group p-0 overflow-hidden">
+            <div class="aspect-video bg-slate-100 overflow-hidden relative">
+               {(() => {
+                  const imageMap = {
+                     'mantenimiento-comunidades': '/images/servicios/mantenimiento-comunidades.png',
+                     'limpieza-cristales': '/images/servicios/limpieza-cristales.png',
+                     'lavanderia': '/images/servicios/lavanderia.png',
+                     'custodia-llaves': '/images/servicios/lavanderia.png',
+                     'limpieza-obra': '/images/servicios/lavanderia.png',
+                     'limpieza-garajes': '/images/servicios/mantenimiento-comunidades.png'
+                  };
+                  return (
+                     <img 
+                        src={imageMap[serv.id] || '/images/servicios/lavanderia.png'} 
+                        alt="Servicio de confianza"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                     />
+                  );
+               })()}
+               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+               <div class="absolute top-4 right-4">
+                  <span class="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-900 border border-slate-100">
+                     Dúo de Confianza
+                  </span>
+               </div>
+            </div>
+            <div class="p-10">
+               <div class="flex flex-col md:flex-row gap-8">
+              <div class="shrink-0">
+                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center text-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
+                  <Settings size={32} />
+                </div>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold mb-4">{serv.data.title}</h2>
+                <p class="text-slate-500 mb-6 leading-relaxed">
+                  {serv.data.description}
+                </p>
+                <ul class="space-y-2 mb-8">
+                  {serv.data.features.slice(0, 3).map(f => (
+                    <li class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                      <CheckCircle2 size={14} class="text-slate-900" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <div class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 border-b-2 border-slate-900 pb-1 group-hover:gap-4 transition-all">
+                  Detalles del servicio <ArrowRight size={16} />
+                </div>
+              </div>
+            </div>
+           </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

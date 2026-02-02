@@ -1,0 +1,42 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Header/Navigation.astro';
+import Footer from '../components/Footer/Footer.astro';
+
+const title = "Política de Privacidad | Limpieza Vera Playa";
+const description = "Información detallada sobre cómo tratamos sus datos personales y protegemos su privacidad.";
+---
+
+<BaseLayout {title} {description}>
+  <Navigation slot="header" />
+
+  <section class="py-24 bg-white relative">
+    <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
+    <div class="section-padding relative z-10 max-w-4xl mx-auto">
+      <h1 class="text-4xl md:text-6xl font-bold mb-12 italic">Política de <br/> <span class="premium-gradient-text">Privacidad</span></h1>
+      
+      <div class="prose prose-slate max-w-none">
+         <p class="text-lg text-slate-500 italic mb-12">Última actualización: Febrero 2026</p>
+         
+         <h2 class="font-bold text-2xl mb-4">1. Responsable del Tratamiento</h2>
+         <p>Limpieza Vera Playa, con domicilio en Vera Playa, Almería, es responsable del tratamiento de sus datos personales recogidos a través de este sitio web.</p>
+
+         <h2 class="font-bold text-2xl mb-4">2. Finalidad de los Datos</h2>
+         <p>Recogemos sus datos únicamente para:</p>
+         <ul>
+            <li>Gestionar sus solicitudes de presupuesto.</li>
+            <li>Responder a sus consultas a través de los formularios de contacto.</li>
+            <li>Enviarle información relevante si así lo ha solicitado.</li>
+         </ul>
+
+         <h2 class="font-bold text-2xl mb-4">3. Sus Derechos</h2>
+         <p>Usted tiene derecho a acceder, rectificar, suprimir o limitar el tratamiento de sus datos en cualquier momento enviando un correo a info@limpiezaveraplaya.com.</p>
+
+         <h2 class="font-bold text-2xl mb-4">4. Seguridad</h2>
+         <p>Implementamos las medidas técnicas y organizativas necesarias para garantizar un nivel de seguridad adecuado al riesgo, protegiendo sus datos contra accesos no autorizados.</p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

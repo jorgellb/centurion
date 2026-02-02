@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from 'astro:content';
+import LocalidadLayout from '../../../layouts/LocalidadLayout.astro';
+
+export async function getStaticPaths() {
+  const localidades = await getCollection('localidades');
+  return localidades.map(localidad => ({
+    params: { localidad: localidad.id },
+    props: { localidad }
+  }));
+}
+
+const { localidad } = Astro.props;
+const { Content } = await render(localidad);
+---
+
+<LocalidadLayout {localidad}>
+  <Content />
+</LocalidadLayout>

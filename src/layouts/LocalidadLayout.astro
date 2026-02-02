@@ -1,0 +1,205 @@
+﻿---
+import BaseLayout from './BaseLayout.astro';
+import Navigation from '../components/Header/Navigation.astro';
+import Footer from '../components/Footer/Footer.astro';
+import { MapPin, Star, ShieldCheck, Check, Info, ArrowRight, Shield } from 'lucide-astro';
+import { getCollection } from 'astro:content';
+
+const { localidad } = Astro.props;
+const { nombre, metaTitle, metaDescription, areasCubiertas, testimonios, serviciosDestacados } = localidad.data;
+
+const allServicios = await getCollection('servicios');
+const featuredServicesData = allServicios.filter(s => serviciosDestacados.includes(s.id));
+---
+
+<BaseLayout title={metaTitle} description={metaDescription}>
+  <Navigation slot="header" />
+
+  <!-- Hero Localidad -->
+  <section class="relative py-32 bg-white overflow-hidden">
+    <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-slate-50/50 skew-x-12 translate-x-24 pointer-events-none"></div>
+    
+    <div class="section-padding relative z-10">
+      <nav class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-12">
+         <a href="/" class="hover:text-slate-900 transition-colors">Inicio</a>
+         <span class="opacity-30">/</span>
+         <a href="/localidades/" class="hover:text-slate-900 transition-colors">Localidades</a>
+         <span class="opacity-30">/</span>
+         <span class="text-slate-900">{nombre}</span>
+      </nav>
+
+      <div class="max-w-4xl">
+        <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[0.9] tracking-tighter">
+          Limpieza Profesional <br/> 
+          en <span class="premium-gradient-text italic">{nombre}</span>
+        </h1>
+        <div class="flex flex-wrap gap-4 mb-12">
+            <div class="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-xs font-bold uppercase tracking-widest text-slate-600">
+                <Shield size={14} class="text-slate-900" />
+                Empresa Local
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-xs font-bold uppercase tracking-widest text-slate-600">
+                <Star size={14} class="text-yellow-500" />
+                Máxima Puntuación
+            </div>
+        </div>
+        <p class="text-2xl text-slate-500 leading-relaxed italic max-w-2xl">
+          Especialistas en el cuidado y mantenimiento de propiedades exclusivas en la zona de {nombre}.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido Principal y Sidebar -->
+  <section class="py-24 bg-white">
+    <div class="section-padding">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+        
+        <!-- Columna Izquierda: Detalles y SEO -->
+        <div class="lg:col-span-8 space-y-24">
+          
+          <!-- Texto del MD -->
+          <div class="prose prose-slate prose-xl max-w-none prose-headings:italic prose-headings:font-bold prose-p:text-slate-600 prose-strong:text-slate-900 border-l-4 border-slate-900 pl-8 md:pl-12">
+             <slot />
+          </div>
+
+          <!-- Servicios Destacados en la Zona -->
+          <div class="space-y-12">
+            <h2 class="text-4xl font-bold italic">Nuestros Servicios <br/> <span class="text-slate-400">más demandados en {nombre}</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {featuredServicesData.map(servicio => (
+                <a href={`/servicios/${servicio.id}/`} class="group p-8 bg-slate-50 border border-slate-100 rounded-[2.5rem] hover:bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                  <h3 class="text-2xl font-bold mb-4 flex items-center justify-between">
+                    {servicio.data.title}
+                    <ArrowRight size={20} class="opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all" />
+                  </h3>
+                  <p class="text-slate-500 text-sm line-clamp-3 italic mb-6">
+                    {servicio.data.description}
+                  </p>
+                  <span class="text-xs font-bold uppercase tracking-widest text-slate-900 flex items-center gap-2">
+                    Ver detalles servicio <Check size={14} />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Por qué elegirnos en esta zona -->
+          <div class="bg-slate-900 text-white rounded-[3rem] p-12 md:p-16 relative overflow-hidden">
+             <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+             <h2 class="text-3xl font-bold mb-12 italic">Especialistas locales en {nombre}</h2>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="space-y-4">
+                   <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                      <ShieldCheck size={24} />
+                   </div>
+                   <h4 class="font-bold">Confianza Total</h4>
+                   <p class="text-sm text-slate-400">Conocemos perfectamente las urbanizaciones y requisitos de {nombre}.</p>
+                </div>
+                <div class="space-y-4">
+                   <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                      <Check size={24} />
+                   </div>
+                   <h4 class="font-bold">Rapidez Local</h4>
+                   <p class="text-sm text-slate-400">Al trabajar en la zona, garantizamos tiempos de respuesta mínimos.</p>
+                </div>
+                <div class="space-y-4">
+                   <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                      <Star size={24} />
+                   </div>
+                   <h4 class="font-bold">Calidad Premium</h4>
+                   <p class="text-sm text-slate-400">Aplicamos estándares de hotel de lujo en cada propiedad privada.</p>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Derecha -->
+        <div class="lg:col-span-4 space-y-12">
+          
+          <!-- Sticky Form/CTA -->
+          <div class="bg-slate-50 border border-slate-100 rounded-[3rem] p-10 sticky top-32 text-center">
+            <div class="w-16 h-16 bg-slate-900 text-white rounded-3xl flex items-center justify-center mx-auto mb-8 -rotate-6">
+                <MapPin size={32} />
+            </div>
+            <h3 class="text-2xl font-bold mb-4">¿Vives en {nombre}?</h3>
+            <p class="text-slate-500 text-sm mb-10 italic">Solicita un presupuesto personalizado para tu vivienda o comunidad sin compromiso.</p>
+            
+            <a href={`/presupuesto/?localidad=${localidad.id}`} class="btn-primary w-full justify-center py-6 text-xl">
+               Pedir Presupuesto
+            </a>
+
+            <div class="mt-8 pt-8 border-t border-slate-200">
+               <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Áreas de Cobertura Específica</p>
+               <ul class="space-y-4 text-left">
+                  {areasCubiertas.map(area => (
+                    <li class="flex items-center gap-3 text-sm text-slate-600">
+                       <div class="w-2 h-2 rounded-full bg-slate-900"></div>
+                       {area}
+                    </li>
+                  ))}
+               </ul>
+            </div>
+          </div>
+
+          <!-- Info Extra / Trust Badges -->
+          <div class="p-8 border border-slate-100 rounded-[2rem] space-y-6">
+             <div class="flex gap-4">
+                <Info size={20} class="text-slate-900 shrink-0" />
+                <p class="text-sm text-slate-500 italic">Disponemos de equipo propio en {nombre} durante todo el año, incluyendo temporada baja.</p>
+             </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios de la Zona -->
+  {testimonios && testimonios.length > 0 && (
+    <section class="py-32 bg-slate-50 relative overflow-hidden">
+      <div class="section-padding relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-24">
+           <h2 class="text-4xl md:text-5xl font-bold italic mb-6">Opiniones en <span class="premium-gradient-text">{nombre}</span></h2>
+           <p class="text-slate-500">Lo que nuestros clientes de la zona dicen sobre la experiencia Vera Playa.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {testimonios.map(t => (
+            <div class="p-10 bg-white border border-slate-100 rounded-[3rem] shadow-sm relative">
+              <div class="absolute top-10 right-10 text-slate-100">
+                 <Star size={64} fill="currentColor" />
+              </div>
+              <div class="flex gap-1 mb-8 relative z-10">
+                {[...Array(t.rating)].map(() => <Star size={16} fill="currentColor" class="text-yellow-400" />)}
+              </div>
+              <p class="text-xl italic mb-10 leading-relaxed text-slate-700 relative z-10">"{t.texto}"</p>
+              <div class="flex items-center gap-4 relative z-10">
+                <div class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center text-white font-bold">
+                   {t.cliente.charAt(0)}
+                </div>
+                <div>
+                  <p class="font-bold text-slate-900">{t.cliente}</p>
+                  <p class="text-xs text-slate-400 uppercase tracking-widest">{t.propiedad}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- SEO Footer Local -->
+  <section class="py-24 bg-white border-t border-slate-100">
+     <div class="section-padding text-center">
+        <p class="text-sm text-slate-400 italic">
+           Somos tu empresa de referencia para <strong>servicios de limpieza en {nombre}</strong>. 
+           Cubrimos desde la zona de playa hasta el interior, garantizando los mejores resultados en la Costa de Almería.
+        </p>
+     </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

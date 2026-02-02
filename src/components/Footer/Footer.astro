@@ -1,0 +1,95 @@
+﻿---
+import { MapPin, Phone, Mail, Instagram, Facebook } from 'lucide-astro';
+
+const localidades = [
+  { id: 'vera-playa', nombre: 'Vera Playa' },
+  { id: 'puerto-rey', nombre: 'Puerto Rey' },
+  { id: 'garrucha', nombre: 'Garrucha' },
+  { id: 'villaricos', nombre: 'Villaricos' },
+  { id: 'palomares', nombre: 'Palomares' }
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-slate-50 border-t border-slate-200 mt-20">
+  <div class="max-w-7xl mx-auto px-4 md:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <!-- About -->
+      <div class="space-y-6">
+        <a href="/" class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
+            <span class="font-bold text-lg">L</span>
+          </div>
+          <span class="font-heading font-bold text-xl tracking-tight">LIMPIEZA <br/> VERA PLAYA</span>
+        </a>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Especialistas en limpieza profesional y gestión de propiedades en la Costa de Almería. Brindamos confianza y calidad excepcional en cada servicio.
+        </p>
+        <div class="flex gap-4">
+          <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all">
+            <Instagram size={20} />
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all">
+            <Facebook size={20} />
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-bold text-slate-900 mb-6">Empresa</h3>
+        <ul class="space-y-4">
+          <li><a href="/servicios/" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Nuestros Servicios</a></li>
+          <li><a href="/sobre-nosotros/" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Sobre Nosotros</a></li>
+          <li><a href="/blog/" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Blog y Consejos</a></li>
+          <li><a href="/contacto/" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Contacto</a></li>
+          <li><a href="/privacidad/" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Política de Privacidad</a></li>
+        </ul>
+      </div>
+
+      <!-- Locations Dropdown Replacement/Grid -->
+      <div class="lg:col-span-2">
+        <h3 class="font-bold text-slate-900 mb-6">Zonas de Actuación</h3>
+        <div class="grid grid-cols-2 gap-3">
+          {localidades.map(loc => (
+            <a 
+              href={`/localidades/${loc.id}/`}
+              class="flex items-center gap-2 p-3 bg-white border border-slate-200 rounded-xl hover:border-slate-400 hover:shadow-sm transition-all text-sm font-medium text-slate-700"
+            >
+              <MapPin size={16} class="text-slate-400" />
+              {loc.nombre}
+            </a>
+          ))}
+        </div>
+        
+        <div class="mt-8 p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-1">
+            <p class="font-bold text-slate-900">¿Necesitas ayuda urgente?</p>
+            <p class="text-xs text-slate-500">Estamos disponibles para emergencias 24/7</p>
+          </div>
+          <a href="tel:+34950000000" class="btn-primary py-2 px-6 text-sm">
+            <Phone size={16} />
+            Llamar ahora
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-200 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-slate-400">
+        © {currentYear} Limpieza Vera Playa. Todos los derechos reservados.
+      </p>
+      <div class="flex items-center gap-6">
+        <span class="flex items-center gap-1 text-xs text-slate-400">
+          <Mail size={14} />
+          info@limpiezaveraplaya.com
+        </span>
+        <span class="flex items-center gap-1 text-xs text-slate-400">
+          <Phone size={14} />
+          +34 950 000 000
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>

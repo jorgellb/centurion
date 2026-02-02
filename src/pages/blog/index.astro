@@ -1,0 +1,69 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Header/Navigation.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import { getCollection } from 'astro:content';
+import { Calendar, User, ArrowRight } from 'lucide-astro';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const title = "Blog y Consejos de Limpieza | Limpieza Vera Playa";
+const description = "Descubre consejos profesionales sobre limpieza, mantenimiento y gestión de propiedades vacacionales en la Costa de Almería.";
+---
+
+<BaseLayout {title} {description}>
+  <Navigation slot="header" />
+
+  <section class="py-24 bg-white relative">
+    <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
+    <div class="section-padding relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <h1 class="text-5xl md:text-7xl font-bold mb-8 italic">Journal & <br/> <span class="premium-gradient-text">Efecto Vera Playa</span></h1>
+        <p class="text-xl text-slate-500 leading-relaxed italic">
+          Compartimos nuestro conocimiento para ayudarte a mantener tus espacios siempre perfectos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedPosts.map(post => (
+          <a href={`/blog/${post.id}/`} class="linear-card group">
+            <div class="aspect-video bg-slate-100 rounded-xl mb-6 overflow-hidden relative">
+               <div class="absolute inset-0 flex items-center justify-center text-slate-300 font-bold opacity-20">IMAGES</div>
+               <div class="absolute top-4 left-4">
+                  <span class="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-900 border border-slate-100">
+                     {post.data.tags[0]}
+                  </span>
+               </div>
+            </div>
+            
+            <div class="flex items-center gap-4 text-xs text-slate-400 mb-4">
+               <span class="flex items-center gap-1">
+                  <Calendar size={12} />
+                  {post.data.date.toLocaleDateString('es-ES')}
+               </span>
+               <span class="flex items-center gap-1">
+                  <User size={12} />
+                  {post.data.author}
+               </span>
+            </div>
+
+            <h2 class="text-xl font-bold mb-4 group-hover:text-slate-600 transition-colors leading-tight">
+               {post.data.title}
+            </h2>
+            
+            <p class="text-sm text-slate-500 mb-6 line-clamp-2">
+               {post.data.excerpt}
+            </p>
+
+            <div class="flex items-center text-xs font-bold uppercase tracking-widest text-slate-900 group-hover:gap-2 transition-all">
+               Leer artículo <ArrowRight size={14} />
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

@@ -1,0 +1,203 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Header/Navigation.astro';
+import Footer from '../components/Footer/Footer.astro';
+import { getCollection } from 'astro:content';
+import { CheckCircle2, ShieldCheck, Zap, ArrowRight, Star, Settings, Award } from 'lucide-astro';
+
+const servicios = await getCollection('servicios');
+const mainServicios = servicios.slice(0, 6);
+
+const title = "Expertos en Limpieza Profesional y Gestión de Propiedades";
+const description = "Limpieza Vera Playa ofrece servicios de limpieza de alta gama, mantenimiento de comunidades y gestión vacacional en Vera Playa, Garrucha y toda la Costa de Almería.";
+---
+
+<BaseLayout {title} {description}>
+  <Navigation slot="header" />
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
+    <!-- Linear background pattern -->
+    <div class="absolute inset-0 linear-grid opacity-[0.4] pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-slate-50 to-transparent pointer-events-none"></div>
+    
+    <div class="section-padding relative z-10 w-full">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/5 border border-slate-900/10 rounded-full mb-6">
+          <span class="flex h-2 w-2 rounded-full bg-slate-900 animate-pulse"></span>
+          <span class="text-xs font-bold tracking-widest uppercase text-slate-900">Costa de Almería</span>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-bold leading-[1.1] mb-8">
+          Confianza en cada <span class="premium-gradient-text">detalle</span>, excelencia en cada rincón.
+        </h1>
+        
+        <p class="text-xl text-slate-500 mb-10 leading-relaxed max-w-2xl">
+          Somos un equipo de confianza de dos personas dedicadas a cuidar su hogar o comunidad. Brindamos un trato familiar y profesional en el Levante Almeriense, garantizando que cada detalle brille.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 mb-16">
+          <a href="/presupuesto/" class="btn-primary text-lg px-8">
+            Solicitar Presupuesto
+            <ArrowRight size={20} />
+          </a>
+          <a href="/servicios/" class="btn-secondary text-lg px-8">
+            Nuestros Servicios
+          </a>
+        </div>
+
+        <div class="relative w-full aspect-[21/9] rounded-[2rem] overflow-hidden border border-slate-100 shadow-2xl">
+           <img src="/images/hero-main.png" alt="Limpieza profesional en la Costa de Almería" class="w-full h-full object-cover" />
+           <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+        </div>
+
+        <div class="mt-16 flex items-center gap-8 grayscale opacity-50">
+          <div class="flex flex-col">
+            <span class="text-2xl font-bold text-slate-900 font-heading">15+</span>
+            <span class="text-xs uppercase tracking-wider font-medium text-slate-500">Años de experiencia</span>
+          </div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div class="flex flex-col">
+            <span class="text-2xl font-bold text-slate-900 font-heading">500+</span>
+            <span class="text-xs uppercase tracking-wider font-medium text-slate-500">Clientes felices</span>
+          </div>
+          <div class="w-px h-10 bg-slate-200"></div>
+          <div class="flex flex-col">
+            <span class="text-2xl font-bold text-slate-900 font-heading">100%</span>
+            <span class="text-xs uppercase tracking-wider font-medium text-slate-500">Garantía de calidad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Professional Services Grid -->
+  <section class="bg-slate-50 py-24 border-y border-slate-200">
+    <div class="section-padding">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 italic">Cuidamos su hogar</h2>
+        <p class="text-slate-500">Servicios personalizados realizados con mimo y detalle por nuestro equipo de confianza.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {mainServicios.map(servicio => (
+          <a href={`/servicios/${servicio.id}/`} class="linear-card group">
+            <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-900 mb-6 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
+              <Settings size={24} />
+            </div>
+            <h3 class="text-xl font-bold mb-3">{servicio.data.title}</h3>
+            <p class="text-sm text-slate-500 mb-6 line-clamp-2">{servicio.data.description}</p>
+            <div class="flex items-center text-xs font-bold uppercase tracking-wider text-slate-900 group-hover:gap-2 transition-all">
+              Leer más <ArrowRight size={14} />
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: The Three Pillars -->
+  <section class="py-24 bg-white relative">
+    <div class="section-padding">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div>
+          <h2 class="text-4xl font-bold mb-12">Nuestra Filosofía de Trabajo</h2>
+          <div class="space-y-12">
+            <div class="flex gap-6">
+              <div class="shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100">
+                <Star size={24} />
+              </div>
+              <div>
+                <h4 class="text-xl font-bold mb-2">Pilar de Bienestar</h4>
+                <p class="text-slate-500 leading-relaxed">Creamos hogares que respiran calma y orden. Un espacio limpio no solo se ve bien, sino que mejora su calidad de vida y la de su familia.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <div class="shrink-0 w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-600 border border-green-100">
+                <ShieldCheck size={24} />
+              </div>
+              <div>
+                <h4 class="text-xl font-bold mb-2">Pilar de Salud</h4>
+                <p class="text-slate-500 leading-relaxed">No solo quitamos el polvo, cuidamos su entorno. Utilizamos productos seguros para su familia y mascotas, garantizando una higiene profunda en cada detalle.</p>
+              </div>
+            </div>
+            <div class="flex gap-6">
+              <div class="shrink-0 w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 border border-purple-100">
+                <Zap size={24} />
+              </div>
+              <div>
+                <h4 class="text-xl font-bold mb-2">Pilar de Respeto</h4>
+                <p class="text-slate-500 leading-relaxed">Su casa es su santuario. Por eso, tratamos cada objeto y superficie con el máximo respeto y cuidado, preservando su valor y belleza original.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-square bg-slate-100 rounded-3xl overflow-hidden border border-slate-200 shadow-2xl rotate-2">
+            <div class="absolute inset-0 flex items-center justify-center text-slate-300 font-heading text-8xl font-bold opacity-20 text-center">LIMPIEZA <br/> VERA PLAYA</div>
+          </div>
+          <div class="absolute -bottom-10 -left-10 p-8 bg-white shadow-xl rounded-2xl border border-slate-100 max-w-xs -rotate-3">
+             <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center text-white">
+                  <Award size={24} />
+                </div>
+                <div class="font-bold text-lg">Certificado Profesional</div>
+             </div>
+             <p class="text-sm text-slate-500">Cumplimos rigurosamente con todos los reglamentos técnicos y de desinfección.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Trato Personal -->
+  <section class="py-24 bg-slate-900 text-white overflow-hidden relative">
+    <div class="absolute inset-0 linear-grid opacity-[0.05] pointer-events-none"></div>
+    <div class="section-padding relative z-10">
+      <div class="max-w-3xl mb-16 text-center mx-auto">
+        <h2 class="text-3xl md:text-5xl font-bold mb-8 italic">Un servicio personal y cercano</h2>
+        <p class="text-slate-300 text-lg">Al ser un equipo de dos personas, le garantizamos que siempre seremos nosotros quienes cuidemos su propiedad, brindándole la seguridad y confianza que usted merece.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-8 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm text-center">
+           <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <ShieldCheck size={24} />
+           </div>
+           <h4 class="font-bold text-xl mb-4">Confianza Segura</h4>
+           <p class="text-slate-300 text-sm">Usted siempre sabrá quién entra en su casa. Sin cambios de personal, solo nosotros dos.</p>
+        </div>
+        <div class="p-8 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm text-center">
+           <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Star size={24} />
+           </div>
+           <h4 class="font-bold text-xl mb-4">Detalle Minucioso</h4>
+           <p class="text-slate-300 text-sm">Nos tomamos el tiempo necesario para que cada rincón esté perfecto, como si fuera nuestra propia casa.</p>
+        </div>
+        <div class="p-8 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm text-center">
+           <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 size={24} />
+           </div>
+           <h4 class="font-bold text-xl mb-4">Garantía Directa</h4>
+           <p class="text-slate-300 text-sm">Cualquier duda o necesidad se resuelve directamente con nosotros, sin intermediarios ni esperas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-white">
+    <div class="section-padding">
+      <div class="bg-slate-50 rounded-[3rem] p-12 md:p-20 text-center border border-slate-100">
+        <h2 class="text-4xl md:text-6xl font-bold mb-8 tracking-tight">¿Listo para transformar <br/> tu espacio?</h2>
+        <p class="text-xl text-slate-500 mb-12 max-w-2xl mx-auto italic">Obtén un presupuesto personalizado adecuado a tus necesidades específicas. Sin compromiso.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="/presupuesto/" class="btn-primary text-xl px-12 py-4">Solicitar Ahora</a>
+          <a href="tel:+34950000000" class="btn-secondary text-xl px-12 py-4">Llamar 950 000 000</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

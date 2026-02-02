@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Header/Navigation.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import { Calendar, User, ArrowLeft, Clock } from 'lucide-astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, metaTitle, metaDescription, date, author, tags } = post.data;
+---
+
+<BaseLayout title={metaTitle} description={metaDescription}>
+  <Navigation slot="header" />
+
+  <article class="py-24 bg-white relative">
+    <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
+    <div class="section-padding relative z-10">
+      
+      <a href="/blog/" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-colors mb-12 group">
+         <ArrowLeft size={14} class="group-hover:-translate-x-1 transition-transform" />
+         Volver al Blog
+      </a>
+
+      <div class="max-w-4xl">
+        <div class="flex flex-wrap gap-2 mb-8">
+           {tags.map(tag => (
+             <span class="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                {tag}
+             </span>
+           ))}
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-bold mb-8 italic text-slate-900 leading-tight">
+           {title}
+        </h1>
+
+        <div class="flex items-center gap-6 text-sm text-slate-400 mb-16 border-y border-slate-100 py-6">
+           <div class="flex items-center gap-2">
+              <Calendar size={16} class="text-slate-900" />
+              {date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+           </div>
+           <div class="flex items-center gap-2">
+              <User size={16} class="text-slate-900" />
+              {author}
+           </div>
+           <div class="flex items-center gap-2">
+              <Clock size={16} class="text-slate-900" />
+              4 min lectura
+           </div>
+        </div>
+
+        <div class="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:font-heading prose-p:text-slate-600 prose-strong:text-slate-900 prose-a:text-slate-900 prose-a:font-bold hover:prose-a:text-slate-600">
+           <Content />
+        </div>
+      </div>
+      
+      <div class="mt-24 pt-12 border-t border-slate-100">
+         <div class="bg-slate-50 rounded-[2rem] p-12 text-center max-w-3xl mx-auto">
+            <h3 class="text-2xl font-bold mb-4 italic">¿Necesitas ayuda con tu propiedad?</h3>
+            <p class="text-slate-500 mb-8 italic">Solicita un presupuesto sin compromiso y deja que profesionales se encarguen de todo.</p>
+            <a href="/presupuesto/" class="btn-primary px-8 inline-flex">Pedir Presupuesto</a>
+         </div>
+      </div>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>

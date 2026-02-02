@@ -1,0 +1,58 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Header/Navigation.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import { getCollection } from 'astro:content';
+import { MapPin, ArrowRight } from 'lucide-astro';
+
+const localidades = await getCollection('localidades');
+
+const title = "Zonas de Actuación | Costa de Almería";
+const description = "Cubrimos Vera Playa, Garrucha, Puerto Rey, Villaricos y Palomares con servicios profesionales de limpieza.";
+---
+
+<BaseLayout {title} {description}>
+  <Navigation slot="header" />
+
+  <section class="py-24 bg-white relative">
+    <div class="absolute inset-0 linear-grid opacity-[0.2] pointer-events-none"></div>
+    <div class="section-padding relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <h1 class="text-5xl md:text-7xl font-bold mb-8 italic">Zonas de Actuación</h1>
+        <p class="text-xl text-slate-500 leading-relaxed">
+          Nuestra base operativa se encuentra en el corazón de la Costa de Almería, permitiéndonos ofrecer un servicio ágil y eficiente en las localidades más exclusivas.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {localidades.map(loc => (
+          <a href={`/localidades/${loc.id}/`} class="linear-card group h-full flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 bg-slate-900 border border-slate-900 rounded-2xl flex items-center justify-center text-white mb-8 group-hover:rotate-6 transition-all duration-500">
+                <MapPin size={24} />
+              </div>
+              <h2 class="text-2xl font-bold mb-4">{loc.data.nombre}</h2>
+              <p class="text-slate-500 text-sm mb-8 leading-relaxed">
+                {loc.data.metaDescription}
+              </p>
+            </div>
+            
+            <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+              <span class="text-xs uppercase tracking-widest font-bold text-slate-400">Ver áreas cubiertas</span>
+              <ArrowRight size={18} class="text-slate-900 group-hover:translate-x-2 transition-transform" />
+            </div>
+          </a>
+        ))}
+        
+        <!-- CTA Card -->
+        <div class="linear-card bg-slate-900 text-white flex flex-col justify-center items-center text-center p-12">
+           <h3 class="text-2xl font-bold mb-6 italic">¿No ves tu <br/> localidad?</h3>
+           <p class="text-slate-400 text-sm mb-8 italic">Consúltanos, habitualmente ampliamos nuestro radio de acción para proyectos específicos.</p>
+           <a href="/contacto/" class="btn-secondary w-full justify-center">Contactar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
