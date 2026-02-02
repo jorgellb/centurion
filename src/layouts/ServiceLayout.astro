@@ -5,7 +5,8 @@ import Footer from '../components/Footer/Footer.astro';
 import { 
   Settings, CheckCircle2, ShieldCheck, Zap, Users, 
   Layout, Maximize, Sun, Layers, Grid, Lock, 
-  Smartphone, EyeOff, Scissors, ShoppingBag, ArrowRight
+  Smartphone, EyeOff, Scissors, ShoppingBag, ArrowRight,
+  Droplets, Box, Hotel
 } from 'lucide-astro';
 
 const { servicio } = Astro.props;
@@ -89,10 +90,10 @@ const { title, metaTitle, metaDescription, description, features, priceRange, fa
           {products && products.length > 0 && (
             <div class="space-y-12 pt-16 border-t border-slate-100">
               <h2 class="text-4xl font-bold italic mb-12 text-slate-900">Catálogo de <span class="text-slate-400">Soluciones</span></h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {products.map(product => {
                   const Icon = {
-                    Layout, Maximize, Sun, Zap, ShieldCheck, Layers, Grid, Lock, Smartphone, EyeOff, Scissors, ShoppingBag
+                    Layout, Maximize, Sun, Zap, ShieldCheck, Layers, Grid, Lock, Smartphone, EyeOff, Scissors, ShoppingBag, Droplets, Box, Hotel
                   }[product.icon] || Settings;
 
                   return (
@@ -102,7 +103,7 @@ const { title, metaTitle, metaDescription, description, features, priceRange, fa
                         <div class="w-14 h-14 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center text-slate-900 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500 mb-6">
                           <Icon size={28} />
                         </div>
-                        <h3 class="text-2xl font-bold mb-4">{product.title}</h3>
+                        <h3 class="text-xl font-bold mb-4 leading-snug">{product.title}</h3>
                         <p class="text-slate-500 text-sm leading-relaxed italic mb-6">
                           {product.description}
                         </p>
