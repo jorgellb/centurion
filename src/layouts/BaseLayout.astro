@@ -51,6 +51,57 @@ const siteName = "Multiservicios Vera Playa";
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0f172a">
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="ES-AL">
+    <meta name="geo.placename" content="Vera Playa, Almería">
+    
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Multiservicios Vera Playa",
+      "image": new URL('/images/hero-main.png', Astro.url).href,
+      "url": "https://limpiezaveraplaya.com",
+      "telephone": "+34657085019",
+      "email": "info@multiserviciosveraplaya.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vera Playa",
+        "addressRegion": "Almería",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.2167,
+        "longitude": -1.8333
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "areaServed": [
+        {"@type": "City", "name": "Vera Playa"},
+        {"@type": "City", "name": "Garrucha"},
+        {"@type": "City", "name": "Villaricos"},
+        {"@type": "City", "name": "Puerto Rey"},
+        {"@type": "City", "name": "Palomares"},
+        {"@type": "City", "name": "Mojácar"}
+      ],
+      "serviceType": ["Limpieza profesional", "Cerrajería 24h", "Reformas", "Carpintería de aluminio", "Gestión Airbnb"],
+      "priceRange": "€€"
+    })} />
   </head>
   <body class="selection:bg-slate-900 selection:text-white">
     <slot name="header" />

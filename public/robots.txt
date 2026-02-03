@@ -1,0 +1,15 @@
+# robots.txt for Multiservicios Vera Playa
+# https://limpiezaveraplaya.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://limpiezaveraplaya.com/sitemap-index.xml
+
+# Disallow admin and private paths
+Disallow: /api/
+Disallow: /_astro/
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
