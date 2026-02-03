@@ -188,6 +188,21 @@ const MultiStepForm = () => {
                                     </label>
                                 </div>
                             </div>
+
+                            <div className="space-y-3 pt-4 border-t border-slate-100">
+                                <label className="flex items-center gap-3 cursor-pointer group">
+                                    <input
+                                        type="checkbox"
+                                        name="reportaje"
+                                        checked={formData.reportaje || false}
+                                        onChange={handleChange}
+                                        className="w-5 h-5 rounded text-purple-600 border-slate-300 focus:ring-purple-500"
+                                    />
+                                    <span className="text-sm font-medium text-slate-600 group-hover:text-purple-600 transition-colors">
+                                        Me interesa un reportaje audiovisual profesional (Dron + Foto Pro)
+                                    </span>
+                                </label>
+                            </div>
                         </div>
                     )}
 
