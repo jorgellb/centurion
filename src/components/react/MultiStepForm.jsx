@@ -59,14 +59,33 @@ const MultiStepForm = () => {
     return (
         <div className="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden">
             {/* Header del Formulario */}
-            <div className="bg-slate-900 p-8 text-white flex justify-between items-center">
-                <div>
-                    <h3 className="font-bold text-xl italic">Estudio Gratuito</h3>
-                    <p className="text-slate-400 text-sm">Paso {step} de 3</p>
+            <div
+                className="p-8 flex justify-between items-center"
+                style={{ backgroundColor: '#1e3a8a', color: '#ffffff' }}
+            >
+                <div style={{ color: '#ffffff' }}>
+                    <h3
+                        className="font-bold text-2xl italic m-0"
+                        style={{ color: '#ffffff', margin: 0, display: 'block' }}
+                    >
+                        Estudio Gratuito
+                    </h3>
+                    <p
+                        className="text-sm m-0"
+                        style={{ color: '#dbeafe', margin: 0, opacity: 0.9 }}
+                    >
+                        Paso {step} de 3
+                    </p>
                 </div>
                 <div className="flex gap-2">
                     {[1, 2, 3].map(i => (
-                        <div key={i} className={`h-2 w-8 rounded-full transition-all ${step >= i ? 'bg-blue-500' : 'bg-slate-700'}`}></div>
+                        <div
+                            key={i}
+                            className="h-2 w-8 rounded-full transition-all"
+                            style={{
+                                backgroundColor: step >= i ? '#ffffff' : 'rgba(255, 255, 255, 0.2)',
+                            }}
+                        ></div>
                     ))}
                 </div>
             </div>

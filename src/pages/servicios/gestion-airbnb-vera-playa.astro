@@ -216,7 +216,7 @@ const description = "Gestión integral de apartamentos turísticos en Vera Playa
   </section>
 
   <!-- Lead Capture Form Section -->
-  <section class="py-32 bg-slate-50 relative overflow-hidden">
+  <section id="contacto" class="py-32 bg-slate-50 relative overflow-hidden">
       <!-- Decoración de fondo -->
       <div class="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
           <div class="absolute right-0 top-1/4 w-96 h-96 bg-blue-200 rounded-full blur-3xl mix-blend-multiply filter"></div>
@@ -272,7 +272,50 @@ const description = "Gestión integral de apartamentos turísticos en Vera Playa
                   Resolvemos las dudas más habituales de los propietarios. Si no encuentra su respuesta, contáctenos directamente.
               </p>
           </div>
-          <FAQSection client:visible />
+          <FAQSection 
+            items={[
+                {
+                    category: "Sobre los Drones y Contenido Audiovisual",
+                    items: [
+                        {
+                            question: "¿Es legal grabar con drones en mi urbanización?",
+                            answer: "Sí, totalmente. Contamos con pilotos certificados y cumplimos con la normativa de AESA (Agencia Estatal de Seguridad Aérea). Realizamos grabaciones respetando siempre la privacidad de los vecinos y enfocándonos en el valor estético de su propiedad y su entorno."
+                        },
+                        {
+                            question: "¿Tengo que pagar aparte por las fotos y el vídeo de dron?",
+                            answer: "El pack audiovisual profesional está incluido sin coste adicional en nuestro modelo de Gestión Integral. Queremos que su anuncio sea el mejor de la zona porque su éxito es el nuestro."
+                        }
+                    ]
+                },
+                {
+                    category: "Sobre la Gestión y Seguridad",
+                    items: [
+                        {
+                            question: "¿Quién se encarga de la entrega de llaves?",
+                            answer: "Nosotros personalmente. Realizamos un check-in presencial para conocer al huésped, explicarle las normas de la casa y verificar su identidad. Nada de cajetines inseguros en la calle."
+                        },
+                        {
+                            question: "¿Qué pasa si un huésped rompe algo?",
+                            answer: "Como especialistas en multiservicios, tenemos la capacidad de reparar pequeñas averías de inmediato. Además, gestionamos la reclamación de la fianza o el seguro de Airbnb/Booking para que usted no tenga que preocuparse por nada."
+                        }
+                    ]
+                },
+                {
+                    category: "Sobre Pagos y Legalidad",
+                    items: [
+                        {
+                            question: "¿Cuándo recibo el dinero de mis reservas?",
+                            answer: "El dinero de las plataformas (Airbnb/Booking) llega directamente a su cuenta bancaria. Nosotros emitimos una factura mensual por nuestros servicios de gestión sobre las reservas completadas. Transparencia total."
+                        },
+                        {
+                            question: "¿Me ayudan con la Licencia Turística y el registro de viajeros?",
+                            answer: "Por supuesto. Le asesoramos en el trámite de la licencia y nos encargamos del registro obligatorio de viajeros en el portal de la Policía/Guardia Civil (Hospederías), cumpliendo estrictamente con la normativa vigente en Andalucía."
+                        }
+                    ]
+                }
+            ]} 
+            client:visible 
+          />
       </div>
   </section>
 

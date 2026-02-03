@@ -19,8 +19,12 @@ export async function getStaticPaths() {
 const { localidad } = Astro.props;
 const { nombre } = localidad.data;
 
+const serviceEntry = await getEntry('servicios', 'cerrajero-24h');
+const { faq } = serviceEntry.data;
+
 const title = `Cerrajero 24 Horas en ${nombre} | Urgencias y Aperturas`;
 const description = `Cerrajero de urgencia 24h en ${nombre}. Llegamos en menos de 30 minutos. Apertura de puertas sin daños, cambio de cerraduras y seguridad. ¡Llame ahora!`;
+import FAQSection from '../../../components/react/FAQSection.jsx';
 ---
 
 <BaseLayout {title} {description}>
@@ -194,6 +198,19 @@ const description = `Cerrajero de urgencia 24h en ${nombre}. Llegamos en menos d
       </div>
     </div>
   </section>
+
+  <!-- FAQ Section -->
+  {faq && faq.length > 0 && (
+    <section class="py-24 bg-white border-t border-slate-100">
+      <div class="section-padding">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold italic mb-6 text-slate-900">Preguntas Frecuentes</h2>
+          <p class="text-slate-500 max-w-2xl mx-auto italic">Resolvemos sus dudas sobre nuestro servicio de cerrajería en {nombre}.</p>
+        </div>
+        <FAQSection items={faq} client:visible />
+      </div>
+    </section>
+  )}
 
   <!-- CTA Final -->
   <section class="py-24 bg-slate-50">

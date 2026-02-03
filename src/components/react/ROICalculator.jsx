@@ -45,7 +45,7 @@ const ROICalculator = () => {
                 <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white">
                     <Calculator size={24} />
                 </div>
-                <h3 className="text-2xl font-bold italic text-slate-900">Calculadora de Ingresos</h3>
+                <h3 className="text-2xl font-bold italic text-slate-900 leading-tight">Calculadora de Ingresos</h3>
             </div>
 
             <div className="space-y-8">
@@ -57,8 +57,8 @@ const ROICalculator = () => {
                                 key={num}
                                 onClick={() => setHabitaciones(num)}
                                 className={`py-3 rounded-xl text-sm font-bold transition-all ${habitaciones === num
-                                        ? 'bg-slate-900 text-white shadow-lg scale-105'
-                                        : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                                    ? 'bg-slate-900 text-white shadow-lg scale-105'
+                                    : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
                                     }`}
                             >
                                 {num}
@@ -79,8 +79,8 @@ const ROICalculator = () => {
                                 key={t.id}
                                 onClick={() => setTemporada(t.id)}
                                 className={`py-3 rounded-xl text-sm font-bold transition-all ${temporada === t.id
-                                        ? 'bg-blue-600 text-white shadow-lg scale-105'
-                                        : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                                    ? 'bg-blue-600 text-white shadow-lg scale-105'
+                                    : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
                                     }`}
                             >
                                 {t.label}

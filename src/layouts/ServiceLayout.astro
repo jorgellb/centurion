@@ -9,6 +9,7 @@ import {
   Droplets, Box, Hotel, MapPin
 } from 'lucide-astro';
 import { getCollection } from 'astro:content';
+import FAQSection from '../components/react/FAQSection.jsx';
 
 const localities = await getCollection('localidades');
 const { servicio } = Astro.props;
@@ -148,20 +149,11 @@ const isCerrajero = servicio.id === 'cerrajero-24h';
           <!-- FAQ Premium -->
           {faq && faq.length > 0 && (
             <div class="space-y-12 pt-16 border-t border-slate-100">
-              <h3 class="text-3xl font-bold italic">Razones para elegir Aluminio</h3>
-              <div class="grid grid-cols-1 gap-6">
-                {faq.map((item, index) => (
-                  <div class="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl transition-all duration-300">
-                    <div class="flex items-start gap-6">
-                      <span class="text-4xl font-bold text-slate-200">{(index + 1).toString().padStart(2, '0')}</span>
-                      <div>
-                        <h4 class="font-bold text-xl mb-3 text-slate-900">{item.question}</h4>
-                        <p class="text-slate-500 text-sm leading-relaxed italic">{item.answer}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div class="text-center mb-12">
+                <h3 class="text-3xl md:text-5xl font-bold italic mb-4">Preguntas <span class="premium-gradient-text">Frecuentes</span></h3>
+                <p class="text-slate-500 italic">Resolvemos sus dudas sobre nuestro servicio de {title}.</p>
               </div>
+              <FAQSection items={faq} client:visible />
             </div>
           )}
 

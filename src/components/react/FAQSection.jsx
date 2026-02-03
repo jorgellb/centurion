@@ -1,50 +1,15 @@
 import React, { useState } from 'react';
 import { Plus, Minus, MessageCircle } from 'lucide-react';
 
-const FAQSection = () => {
+const FAQSection = ({ items, title, description }) => {
     const [activeIndex, setActiveIndex] = useState(null);
 
-    const faqs = [
-        {
-            category: "Sobre los Drones y Contenido Audiovisual",
-            items: [
-                {
-                    question: "¿Es legal grabar con drones en mi urbanización?",
-                    answer: "Sí, totalmente. Contamos con pilotos certificados y cumplimos con la normativa de AESA (Agencia Estatal de Seguridad Aérea). Realizamos grabaciones respetando siempre la privacidad de los vecinos y enfocándonos en el valor estético de su propiedad y su entorno."
-                },
-                {
-                    question: "¿Tengo que pagar aparte por las fotos y el vídeo de dron?",
-                    answer: "El pack audiovisual profesional está incluido sin coste adicional en nuestro modelo de Gestión Integral. Queremos que su anuncio sea el mejor de la zona porque su éxito es el nuestro."
-                }
-            ]
-        },
-        {
-            category: "Sobre la Gestión y Seguridad",
-            items: [
-                {
-                    question: "¿Quién se encarga de la entrega de llaves?",
-                    answer: "Nosotros personalmente. Realizamos un check-in presencial para conocer al huésped, explicarle las normas de la casa y verificar su identidad. Nada de cajetines inseguros en la calle."
-                },
-                {
-                    question: "¿Qué pasa si un huésped rompe algo?",
-                    answer: "Como especialistas en multiservicios, tenemos la capacidad de reparar pequeñas averías de inmediato. Además, gestionamos la reclamación de la fianza o el seguro de Airbnb/Booking para que usted no tenga que preocuparse por nada."
-                }
-            ]
-        },
-        {
-            category: "Sobre Pagos y Legalidad",
-            items: [
-                {
-                    question: "¿Cuándo recibo el dinero de mis reservas?",
-                    answer: "El dinero de las plataformas (Airbnb/Booking) llega directamente a su cuenta bancaria. Nosotros emitimos una factura mensual por nuestros servicios de gestión sobre las reservas completadas. Transparencia total."
-                },
-                {
-                    question: "¿Me ayudan con la Licencia Turística y el registro de viajeros?",
-                    answer: "Por supuesto. Le asesoramos en el trámite de la licencia y nos encargamos del registro obligatorio de viajeros en el portal de la Policía/Guardia Civil (Hospederías), cumpliendo estrictamente con la normativa vigente en Andalucía."
-                }
-            ]
-        }
-    ];
+    // Normalize items to handle both categorized and flat array
+    const categories = items && items[0]?.items
+        ? items
+        : items
+            ? [{ category: null, items: items }]
+            : [];
 
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
@@ -52,29 +17,34 @@ const FAQSection = () => {
 
     // Schema.org structured data generator
     const generateSchema = () => {
+        const allItems = categories.flatMap(cat => cat.items);
         const schema = {
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": faqs.flatMap(cat => cat.items.map(item => ({
+            "mainEntity": allItems.map(item => ({
                 "@type": "Question",
                 "name": item.question,
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": item.answer
                 }
-            })))
+            }))
         };
         return JSON.stringify(schema);
     };
+
+    if (categories.length === 0) return null;
 
     return (
         <div className="max-w-4xl mx-auto">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: generateSchema() }} />
 
             <div className="space-y-12">
-                {faqs.map((category, catIndex) => (
+                {categories.map((category, catIndex) => (
                     <div key={catIndex} className="space-y-6">
-                        <h3 className="text-xl font-bold px-4 text-purple-600 uppercase tracking-widest">{category.category}</h3>
+                        {category.category && (
+                            <h3 className="text-xl font-bold px-4 text-slate-900 uppercase tracking-widest">{category.category}</h3>
+                        )}
                         <div className="space-y-4">
                             {category.items.map((faq, itemIndex) => {
                                 const globalIndex = `${catIndex}-${itemIndex}`;
@@ -82,7 +52,7 @@ const FAQSection = () => {
                                 return (
                                     <div
                                         key={itemIndex}
-                                        className={`bg-white rounded-2xl border transition-all duration-300 ${isOpen ? 'border-purple-200 shadow-lg' : 'border-slate-100 hover:border-purple-100'}`}
+                                        className={`bg-white rounded-2xl border transition-all duration-300 ${isOpen ? 'border-slate-900 shadow-xl' : 'border-slate-100 hover:border-slate-200'}`}
                                     >
                                         <button
                                             onClick={() => toggleAccordion(globalIndex)}
@@ -92,7 +62,7 @@ const FAQSection = () => {
                                             <span className={`font-bold text-lg transition-colors ${isOpen ? 'text-slate-900' : 'text-slate-700'}`}>
                                                 {faq.question}
                                             </span>
-                                            <span className={`p-1 rounded-full shrink-0 transition-colors ${isOpen ? 'bg-purple-100 text-purple-600' : 'bg-slate-50 text-slate-400'}`}>
+                                            <span className={`p-1 rounded-full shrink-0 transition-colors ${isOpen ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-400'}`}>
                                                 {isOpen ? <Minus size={20} /> : <Plus size={20} />}
                                             </span>
                                         </button>
@@ -101,7 +71,7 @@ const FAQSection = () => {
                                             className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                                         >
                                             <div className="overflow-hidden">
-                                                <div className="p-6 pt-0 text-slate-500 leading-relaxed border-t border-transparent">
+                                                <div className="p-6 pt-0 text-slate-500 leading-relaxed border-t border-transparent italic">
                                                     {faq.answer}
                                                 </div>
                                             </div>
@@ -119,7 +89,7 @@ const FAQSection = () => {
                     href="https://wa.me/34657085019"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-green-50 text-green-700 rounded-2xl font-bold hover:bg-green-100 transition-colors border border-green-100"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-colors shadow-xl"
                 >
                     <MessageCircle size={24} />
                     <span>¿Tienes otra duda? Escríbenos por WhatsApp</span>

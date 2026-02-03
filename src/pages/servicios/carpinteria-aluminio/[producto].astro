@@ -1,8 +1,9 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, getEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Navigation from '../../../components/Header/Navigation.astro';
 import Footer from '../../../components/Footer/Footer.astro';
+import FAQSection from '../../../components/react/FAQSection.jsx';
 import { 
   CheckCircle2, ArrowLeft, ShieldCheck, Zap, 
   Layout, Maximize, Sun, Layers, Grid, Lock, 
@@ -21,6 +22,9 @@ export async function getStaticPaths() {
 const { producto } = Astro.props;
 const { Content } = await render(producto);
 const { title, description, icon, features, metaTitle, metaDescription } = producto.data;
+
+const serviceEntry = await getEntry('servicios', 'carpinteria-metalica');
+const { faq } = serviceEntry.data;
 
 const Icon = {
     Layout, Maximize, Sun, Zap, ShieldCheck, Layers, Grid, Lock, Smartphone, EyeOff, Scissors, ShoppingBag, Droplets, Box, Hotel
@@ -172,6 +176,17 @@ const Icon = {
                 </div>
              </div>
           </div>
+
+          <!-- FAQ Section -->
+          {faq && faq.length > 0 && (
+            <div class="space-y-12 pt-16 border-t border-slate-100 mb-20">
+              <div class="text-center mb-12">
+                <h3 class="text-3xl md:text-5xl font-bold italic mb-4">Preguntas <span class="premium-gradient-text">Frecuentes</span></h3>
+                <p class="text-slate-500 italic">Solucionamos sus dudas sobre carpintería técnica.</p>
+              </div>
+              <FAQSection items={faq} client:visible />
+            </div>
+          )}
           
           <div class="mt-20 p-12 bg-slate-900 rounded-[3rem] text-white relative overflow-hidden shadow-2xl shadow-slate-900/40">
              <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-bl-[100%]"></div>
