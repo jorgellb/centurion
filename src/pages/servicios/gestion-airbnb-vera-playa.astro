@@ -5,6 +5,7 @@ import Footer from '../../components/Footer/Footer.astro';
 import ROICalculator from '../../components/react/ROICalculator.jsx';
 import MultiStepForm from '../../components/react/MultiStepForm.jsx';
 import FAQSection from '../../components/react/FAQSection.jsx';
+import PricingSection from '../../components/react/PricingSection.jsx';
 import { 
   Globe, Users, Sparkles, Key, CheckCircle, Smartphone, 
   TrendingUp, Shield, Star 
@@ -198,6 +199,20 @@ const description = "Gestión integral de apartamentos turísticos en Vera Playa
            </div>
         </div>
      </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="py-24 bg-white">
+      <div class="section-padding">
+          <div class="text-center mb-16">
+              <span class="text-blue-600 font-bold tracking-widest uppercase text-sm mb-4 block">Tarifas Transparentes</span>
+              <h2 class="text-3xl md:text-5xl font-bold italic text-slate-900 mb-6">Elige cómo quieres trabajar</h2>
+              <p class="text-slate-500 max-w-2xl mx-auto">
+                  Sin letra pequeña. Elige entre despreocuparte por completo o mantener el control con nuestro apoyo logístico.
+              </p>
+          </div>
+          <PricingSection client:visible />
+      </div>
   </section>
 
   <!-- Lead Capture Form Section -->
