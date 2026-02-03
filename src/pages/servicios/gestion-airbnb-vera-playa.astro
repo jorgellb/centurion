@@ -4,6 +4,7 @@ import Navigation from '../../components/Header/Navigation.astro';
 import Footer from '../../components/Footer/Footer.astro';
 import ROICalculator from '../../components/react/ROICalculator.jsx';
 import MultiStepForm from '../../components/react/MultiStepForm.jsx';
+import FAQSection from '../../components/react/FAQSection.jsx';
 import { 
   Globe, Users, Sparkles, Key, CheckCircle, Smartphone, 
   TrendingUp, Shield, Star 
@@ -244,6 +245,19 @@ const description = "Gestión integral de apartamentos turísticos en Vera Playa
                   <MultiStepForm client:visible />
               </div>
           </div>
+      </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-24 bg-white">
+      <div class="section-padding">
+          <div class="text-center mb-16">
+              <h2 class="text-3xl md:text-5xl font-bold italic text-slate-900 mb-6">Preguntas Frecuentes</h2>
+              <p class="text-slate-500 max-w-2xl mx-auto">
+                  Resolvemos las dudas más habituales de los propietarios. Si no encuentra su respuesta, contáctenos directamente.
+              </p>
+          </div>
+          <FAQSection client:visible />
       </div>
   </section>
 
