@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Header/Navigation.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import ROICalculator from '../../components/react/ROICalculator.jsx';
+import MultiStepForm from '../../components/react/MultiStepForm.jsx';
+import { 
+  Globe, Users, Sparkles, Key, CheckCircle, Smartphone, 
+  TrendingUp, Shield, Star 
+} from 'lucide-astro';
+
+const title = "Gestión Airbnb Vera Playa | Aumenta tus Ingresos sin Trabajo";
+const description = "Gestión integral de apartamentos turísticos en Vera Playa y Garrucha. Optimizamos tu anuncio en Airbnb y Booking, limpieza, entrega de llaves y atención 24/7.";
+---
+
+<BaseLayout {title} {description}>
+  <Navigation slot="header" />
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex items-center bg-slate-900 overflow-hidden pt-32 pb-20">
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-900/40 z-10"></div>
+        <!-- Placeholder for hero image, using a pattern for now -->
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+    </div>
+
+    <div class="section-padding relative z-10 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-full text-xs font-bold uppercase tracking-widest">
+                    <Star size={14} fill="currentColor" />
+                    Gestión Integral Premium
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight">
+                    Maximiza tus ingresos, <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 italic">nosotros hacemos el resto.</span>
+                </h1>
+                
+                <p class="text-xl text-slate-400 leading-relaxed max-w-xl">
+                    Olvídate de las llaves, la limpieza y los mensajes a las 3 de la mañana. Convierte tu propiedad en Vera Playa en un negocio pasivo de alta rentabilidad.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="#calculadora" class="btn-primary px-8 py-5 text-lg flex justify-center items-center gap-2 shadow-lg shadow-blue-900/20">
+                        <TrendingUp size={20} />
+                        Calcular Rentabilidad
+                    </a>
+                    <a href="https://wa.me/34657085019?text=Hola,%20me%20interesa%20la%20gestión%20integral%20de%20mi%20apartamento" target="_blank" class="px-8 py-5 rounded-2xl border border-white/20 text-white font-bold hover:bg-white/10 transition-all flex justify-center items-center gap-2">
+                        <Smartphone size={20} />
+                        Hablar por WhatsApp
+                    </a>
+                </div>
+
+                <div class="pt-8 border-t border-white/10 flex items-center gap-8 text-sm text-slate-400 font-medium">
+                    <div class="flex items-center gap-2">
+                        <CheckCircle size={16} class="text-emerald-400" />
+                        Sin permanencia
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <CheckCircle size={16} class="text-emerald-400" />
+                        Cobro por éxito
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative hidden lg:block">
+                <!-- Abstract visual representation of profit/ease -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-[3rem] blur-3xl"></div>
+                <div class="relative z-10 transform translate-x-12">
+                     <ROICalculator client:load />
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Pack 360 Section -->
+  <section class="py-32 bg-white relative">
+    <div class="section-padding">
+        <div class="text-center max-w-3xl mx-auto mb-20">
+            <h2 class="text-4xl md:text-5xl font-bold italic mb-6 text-slate-900">Tu Pack 360° de Tranquilidad</h2>
+            <p class="text-slate-500 text-lg">Cubrimos cada etapa del alquiler vacacional para que tú solo veas los ingresos en tu cuenta a fin de mes.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Card 1 -->
+            <div class="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                    <Globe size={32} />
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-slate-900">Difusión Mundial</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">
+                    Creamos anuncios irresistibles con fotografía profesional en Airbnb, Booking y VRBO. Posicionamiento SEO para salir los primeros.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-purple-600 shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                    <Users size={32} />
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-slate-900">Gestión de Huéspedes</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">
+                    Filtrado de viajeros, comunicación 24/7 y resolución de incidencias. Somos la cara amable que garantiza reseñas de 5 estrellas.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-emerald-600 shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                    <Sparkles size={32} />
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-slate-900">Limpieza Hotelera</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">
+                    Limpieza profesional exhaustiva y lavandería industrial de sábanas y toallas tras cada salida. Tu casa, siempre impecable.
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
+                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-orange-600 shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                    <Key size={32} />
+                </div>
+                <h3 class="text-xl font-bold mb-4 text-slate-900">Check-in & Welcome</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">
+                    Recibimiento personal o autónomo (según preferencia), verificación de identidad y explicación del funcionamiento de la vivienda.
+                </p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Calculator Mobile Only Section (since it's in Hero for desktop) -->
+  <section id="calculadora" class="lg:hidden py-24 bg-slate-900">
+      <div class="section-padding">
+          <div class="text-center mb-12">
+              <h2 class="text-3xl font-bold text-white italic mb-4">¿Cuánto puedes ganar?</h2>
+              <p class="text-slate-400">Calculadora estimada para Vera Playa</p>
+          </div>
+          <ROICalculator client:visible />
+      </div>
+  </section>
+
+  <!-- Lead Capture Form Section -->
+  <section class="py-32 bg-slate-50 relative overflow-hidden">
+      <!-- Decoración de fondo -->
+      <div class="absolute top-0 right-0 w-full h-full opacity-30 pointer-events-none">
+          <div class="absolute right-0 top-1/4 w-96 h-96 bg-blue-200 rounded-full blur-3xl mix-blend-multiply filter"></div>
+          <div class="absolute left-0 bottom-1/4 w-96 h-96 bg-purple-200 rounded-full blur-3xl mix-blend-multiply filter"></div>
+      </div>
+
+      <div class="section-padding relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div>
+                  <h2 class="text-4xl md:text-6xl font-bold italic mb-8 text-slate-900">
+                      Empieza a rentabilizar <br/> <span class="premium-gradient-text">tu propiedad hoy</span>
+                  </h2>
+                  <p class="text-xl text-slate-500 mb-12 italic leading-relaxed">
+                      Solicita tu estudio de mercado personalizado y gratuito. Analizaremos tu vivienda y te diremos exactamente cómo optimizarla para obtener el máximo rendimiento.
+                  </p>
+                  
+                  <div class="space-y-8">
+                      <div class="flex gap-4">
+                          <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 shadow-sm shrink-0">
+                              <Shield size={24} />
+                          </div>
+                          <div>
+                              <h4 class="font-bold text-lg mb-1">Garantía de Cuidado</h4>
+                              <p class="text-sm text-slate-500">Mantenemos tu propiedad mejor que si vivieras en ella. Revisiones periódicas y mantenimiento incluido.</p>
+                          </div>
+                      </div>
+                      <div class="flex gap-4">
+                          <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-blue-600 shadow-sm shrink-0">
+                              <TrendingUp size={24} />
+                          </div>
+                          <div>
+                              <h4 class="font-bold text-lg mb-1">Estrategia de Precios Dinámicos</h4>
+                              <p class="text-sm text-slate-500">Ajustamos las tarifas diariamente según la demanda, ocupación y eventos locales para maximizar el beneficio.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div>
+                  <!-- Multi Step Form React Component -->
+                  <MultiStepForm client:visible />
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
